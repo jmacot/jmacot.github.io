@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Herramientas · Javi Macot</title>
+  <title>Herramientas · jmacot</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -11,13 +11,19 @@
       --surface: #ffffff;
       --ink: #1a1a1a;
       --ink-muted: #6b6b6b;
-      --accent: #1a3a5c;
-      --accent-light: #e8eef5;
-      --accent2: #8b3a2f;
-      --accent2-light: #f5ebe9;
       --border: #e0dcd6;
       --shadow: 0 2px 20px rgba(26,26,26,0.08);
       --shadow-hover: 0 8px 40px rgba(26,26,26,0.14);
+
+      /* Colores por etiqueta */
+      --c-quirofano: #1a3a5c;
+      --c-quirofano-light: #e8eef5;
+      --c-administracion: #7c3aed;
+      --c-administracion-light: #f0ebff;
+      --c-documentacion: #b45309;
+      --c-documentacion-light: #fef3e2;
+      --c-planificacion: #0d7377;
+      --c-planificacion-light: #e6f5f5;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +38,7 @@
 
     /* ── HEADER ── */
     header {
-      background: var(--accent);
+      background: #1a3a5c;
       color: white;
       padding: 56px 48px 48px;
       position: relative;
@@ -120,7 +126,60 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ink-muted);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* ── FILTROS ── */
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--ink-muted);
+      color: var(--ink);
+    }
+
+    .filter-btn.active {
+      border-color: transparent;
+      color: white;
+    }
+
+    .filter-btn[data-tag="todos"].active {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .filter-btn[data-tag="quirofano"].active {
+      background: var(--c-quirofano);
+    }
+
+    .filter-btn[data-tag="administracion"].active {
+      background: var(--c-administracion);
+    }
+
+    .filter-btn[data-tag="documentacion"].active {
+      background: var(--c-documentacion);
+    }
+
+    .filter-btn[data-tag="planificacion"].active {
+      background: var(--c-planificacion);
     }
 
     /* ── CARDS ── */
@@ -141,9 +200,13 @@
       flex-direction: column;
       gap: 16px;
       box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
       position: relative;
       overflow: hidden;
+    }
+
+    .card.hidden {
+      display: none;
     }
 
     .card:hover {
@@ -157,14 +220,14 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: var(--card-accent, var(--accent));
+      background: var(--card-accent);
       border-radius: 16px 16px 0 0;
     }
 
     .card-icon {
       width: 48px; height: 48px;
       border-radius: 12px;
-      background: var(--card-icon-bg, var(--accent-light));
+      background: var(--card-icon-bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -182,8 +245,8 @@
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--card-tag-color, var(--accent));
-      background: var(--card-tag-bg, var(--accent-light));
+      color: var(--card-tag-color);
+      background: var(--card-tag-bg);
       padding: 4px 10px;
       border-radius: 999px;
     }
@@ -201,8 +264,8 @@
     }
 
     .card:hover .card-arrow {
-      background: var(--card-accent, var(--accent));
-      border-color: var(--card-accent, var(--accent));
+      background: var(--card-accent);
+      border-color: var(--card-accent);
       color: white;
     }
 
@@ -221,12 +284,33 @@
       flex: 1;
     }
 
-    /* card variants */
-    .card.red {
-      --card-accent: var(--accent2);
-      --card-icon-bg: var(--accent2-light);
-      --card-tag-color: var(--accent2);
-      --card-tag-bg: var(--accent2-light);
+    /* ── VARIANTES POR ETIQUETA ── */
+    .card[data-tag="quirofano"] {
+      --card-accent: var(--c-quirofano);
+      --card-icon-bg: var(--c-quirofano-light);
+      --card-tag-color: var(--c-quirofano);
+      --card-tag-bg: var(--c-quirofano-light);
+    }
+
+    .card[data-tag="administracion"] {
+      --card-accent: var(--c-administracion);
+      --card-icon-bg: var(--c-administracion-light);
+      --card-tag-color: var(--c-administracion);
+      --card-tag-bg: var(--c-administracion-light);
+    }
+
+    .card[data-tag="documentacion"] {
+      --card-accent: var(--c-documentacion);
+      --card-icon-bg: var(--c-documentacion-light);
+      --card-tag-color: var(--c-documentacion);
+      --card-tag-bg: var(--c-documentacion-light);
+    }
+
+    .card[data-tag="planificacion"] {
+      --card-accent: var(--c-planificacion);
+      --card-icon-bg: var(--c-planificacion-light);
+      --card-tag-color: var(--c-planificacion);
+      --card-tag-bg: var(--c-planificacion-light);
     }
 
     /* ── COMING SOON ── */
@@ -237,6 +321,10 @@
       cursor: default;
       pointer-events: none;
       opacity: 0.6;
+      --card-accent: transparent;
+      --card-icon-bg: #f0f0f0;
+      --card-tag-color: var(--ink-muted);
+      --card-tag-bg: #f0f0f0;
     }
 
     .card.placeholder::before { display: none; }
@@ -252,7 +340,7 @@
     }
 
     footer a {
-      color: var(--accent);
+      color: #1a3a5c;
       text-decoration: none;
     }
 
@@ -260,14 +348,16 @@
       header { padding: 40px 24px 36px; }
       main { padding: 40px 20px 60px; }
       .grid { grid-template-columns: 1fr; }
+      .filters { gap: 6px; }
+      .filter-btn { font-size: 10px; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-label">Cirugía de Rodilla · Herramientas clínicas</div>
-    <h1>Herramientas<br><em>para la práctica</em></h1>
+    <div class="header-label">Herramientas clínicas</div>
+    <h1>Herramientas<br><em>de Cirugía Ortopédica y Traumatología</em></h1>
     <p>Aplicaciones web de uso clínico y administrativo para cirugía ortopédica.</p>
     <div class="header-badge">
       <span class="dot"></span>
@@ -278,10 +368,19 @@
   <main>
     <div class="section-label">Aplicaciones disponibles</div>
 
+    <!-- FILTROS POR ETIQUETA -->
+    <div class="filters">
+      <button class="filter-btn active" data-tag="todos" onclick="filtrar('todos')">Todos</button>
+      <button class="filter-btn" data-tag="quirofano" onclick="filtrar('quirofano')">Quirófano</button>
+      <button class="filter-btn" data-tag="planificacion" onclick="filtrar('planificacion')">Planificación</button>
+      <button class="filter-btn" data-tag="documentacion" onclick="filtrar('documentacion')">Documentación</button>
+      <button class="filter-btn" data-tag="administracion" onclick="filtrar('administracion')">Administración</button>
+    </div>
+
     <div class="grid">
 
       <!-- CALCULADORA GUARDIAS -->
-      <a class="card" href="https://jmacot.github.io/calculadora-guardias" target="_blank">
+      <a class="card" data-tag="administracion" href="https://jmacot.github.io/calculadora-guardias" target="_blank">
         <div class="card-meta">
           <div class="card-icon">🏥</div>
           <div class="card-arrow">→</div>
@@ -294,22 +393,48 @@
       </a>
 
       <!-- MATERIAL EXTERNO -->
-      <a class="card red" href="https://jmacot.github.io/Material-Externo" target="_blank">
+      <a class="card" data-tag="documentacion" href="https://jmacot.github.io/Material-Externo" target="_blank">
         <div class="card-meta">
-          <div class="card-icon" style="background:var(--accent2-light)">🔩</div>
+          <div class="card-icon">🔩</div>
           <div class="card-arrow">→</div>
         </div>
         <div>
           <h2>Solicitud de Material Externo</h2>
           <p>Formulario para solicitar material quirúrgico externo. Selección de casa comercial por logo, catálogo de materiales y generación de PDF.</p>
         </div>
+        <div class="card-tag">Documentación</div>
+      </a>
+
+      <!-- PLANTILLAS QUIRÚRGICAS -->
+      <a class="card" data-tag="quirofano" href="https://jmacot.github.io/plantillas-qx" target="_blank">
+        <div class="card-meta">
+          <div class="card-icon">📋</div>
+          <div class="card-arrow">→</div>
+        </div>
+        <div>
+          <h2>Plantillas Quirúrgicas COT</h2>
+          <p>60 plantillas de notas operatorias y tratamientos al alta. Selecciona procedimiento, cirujano y ayudante, y copia el texto generado.</p>
+        </div>
         <div class="card-tag">Quirófano</div>
       </a>
 
-      <!-- PLACEHOLDER -->
-      <div class="card placeholder">
+      <!-- CPAK PLANNER -->
+      <a class="card" data-tag="planificacion" href="https://jmacot.github.io/CPAK" target="_blank">
         <div class="card-meta">
-          <div class="card-icon" style="background:#f0f0f0">＋</div>
+          <div class="card-icon">🦴</div>
+          <div class="card-arrow">→</div>
+        </div>
+        <div>
+          <h2>CPAK Planner</h2>
+          <p>Clasificación CPAK y planificación de alineación coronal en artroplastia total de rodilla. Calcula aHKA, JLO, JLCA y el fenotipo del paciente.</p>
+        </div>
+        <div class="card-tag">Planificación</div>
+      </a>
+
+      <!-- PLACEHOLDER -->
+      <div class="card placeholder" data-tag="none">
+        <div class="card-meta">
+          <div class="card-icon">＋</div>
         </div>
         <div>
           <h2>Próximamente</h2>
@@ -324,6 +449,25 @@
   <footer>
     <a href="https://github.com/jmacot" target="_blank">github.com/jmacot</a> · Herramientas de uso clínico
   </footer>
+
+  <script>
+    function filtrar(tag) {
+      // Actualizar botones
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tag === tag);
+      });
+
+      // Filtrar tarjetas
+      document.querySelectorAll('.card').forEach(card => {
+        if (tag === 'todos') {
+          card.classList.remove('hidden');
+        } else {
+          const cardTag = card.dataset.tag;
+          card.classList.toggle('hidden', cardTag !== tag && cardTag !== 'none');
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
