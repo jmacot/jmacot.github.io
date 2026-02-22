@@ -42,7 +42,7 @@
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **Calculadora de Guardias** | Calcula retribución bruta, neta e IRPF de guardias médicas. 3 módulos: GPF, HSJD y Vithas. Modo oscuro. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
+| **Calculadora de Guardias** | Calcula retribución bruta, neta e IRPF de guardias médicas. 5 configuraciones: HSJD, Vithas, SAS y combinadas. Modo oscuro. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
 
 ---
 
