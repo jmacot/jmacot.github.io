@@ -36,13 +36,13 @@
 | App | Descripción | Enlace |
 |-----|-------------|--------|
 | **Consentimientos Informados** | +210 consentimientos informados de SECOT y SAS organizados por patología con buscador en tiempo real. | [Abrir app](https://jmacot.github.io/consentimientos) \| [Repo](https://github.com/jmacot/consentimientos) |
-| **Solicitud de Material Externo** | Formulario para solicitar material quirúrgico externo. Selección por casa comercial, catálogo y generación de PDF. | [Abrir app](https://jmacot.github.io/Material-Externo) \| [Repo](https://github.com/jmacot/Material-Externo) |
+| **Solicitud de Material Externo** | Formulario para solicitar material quirúrgico externo. 8 proveedores, catálogo de 30+ materiales y generación de PDF. | [Abrir app](https://jmacot.github.io/Material-Externo) \| [Repo](https://github.com/jmacot/Material-Externo) |
 
 ### 💰 Administración
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **Calculadora de Guardias** | Calcula retribución bruta, neta e IRPF de guardias médicas. Compatible con GPF y VITHAS. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
+| **Calculadora de Guardias** | Calcula retribución bruta, neta e IRPF de guardias médicas. 3 módulos: GPF, HSJD y Vithas. Modo oscuro. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
 
 ---
 
