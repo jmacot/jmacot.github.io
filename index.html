@@ -31,6 +31,21 @@
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --ink: #f1f5f9;
+      --ink-muted: #94a3b8;
+      --border: #334155;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+      --shadow-hover: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+      --c-quirofano-light: rgba(14, 165, 233, 0.15);
+      --c-administracion-light: rgba(139, 92, 246, 0.15);
+      --c-documentacion-light: rgba(245, 158, 11, 0.15);
+      --c-planificacion-light: rgba(13, 148, 136, 0.15);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -395,18 +410,67 @@
       text-decoration: none;
     }
 
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+      z-index: 1;
+    }
+    .theme-toggle:hover {
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ── DARK MODE OVERRIDES ── */
+    [data-theme="dark"] header {
+      background: linear-gradient(135deg, #070d1a 0%, #0f172a 100%);
+    }
+
+    [data-theme="dark"] .card h2 {
+      color: var(--ink);
+    }
+
+    [data-theme="dark"] .filter-btn[data-tag="todos"].active {
+      background: var(--ink-muted);
+      border-color: var(--ink-muted);
+    }
+
+    [data-theme="dark"] .card.placeholder {
+      --card-icon-bg: var(--border);
+      --card-tag-color: var(--ink-muted);
+      --card-tag-bg: var(--border);
+    }
+
+    [data-theme="dark"] .dev-warning {
+      background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(251,191,36,0.05) 100%);
+      border-color: rgba(245,158,11,0.3);
+      color: #fbbf24;
+    }
+
     @media (max-width: 600px) {
       header { padding: 40px 24px 36px; }
       main { padding: 40px 20px 60px; }
       .grid { grid-template-columns: 1fr; }
       .filters { gap: 6px; }
       .filter-btn { font-size: 10px; padding: 6px 12px; }
+      .theme-toggle { width: 34px; height: 34px; font-size: 1rem; top: 10px; right: 10px; }
     }
   </style>
 </head>
 <body>
 
   <header>
+    <button class="theme-toggle" id="btn-theme" title="Cambiar tema"></button>
     <div class="header-label">Herramientas clínicas</div>
     <h1>Herramientas<br><em>para Cirugía Ortopédica y Traumatología</em></h1>
     <p>Aplicaciones web de uso clínico y administrativo para cirugía ortopédica.</p>
@@ -559,13 +623,13 @@
   </footer>
 
   <script>
+    // ─────────────────────────────────────────────
+    //  FILTROS
+    // ─────────────────────────────────────────────
     function filtrar(tag) {
-      // Actualizar botones
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tag === tag);
       });
-
-      // Filtrar tarjetas
       document.querySelectorAll('.card').forEach(card => {
         if (tag === 'todos') {
           card.classList.remove('hidden');
@@ -575,6 +639,57 @@
         }
       });
     }
+
+    // ─────────────────────────────────────────────
+    //  DARK MODE
+    // ─────────────────────────────────────────────
+    const btnTheme = document.getElementById('btn-theme');
+
+    function applyTheme(dark) {
+      if (dark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        btnTheme.textContent = '\u2600\uFE0F';
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        btnTheme.textContent = '\uD83C\uDF19';
+      }
+    }
+
+    function getAutoTheme() {
+      const hour = new Date().getHours();
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return (hour >= 21 || hour < 7 || prefersDark) ? 'dark' : 'light';
+    }
+
+    function initTheme() {
+      const saved = localStorage.getItem('theme');
+      const savedDate = localStorage.getItem('theme-date');
+      const today = new Date().toDateString();
+      if (saved && savedDate === today) {
+        applyTheme(saved === 'dark');
+      } else {
+        localStorage.removeItem('theme');
+        localStorage.removeItem('theme-date');
+        applyTheme(getAutoTheme() === 'dark');
+      }
+    }
+
+    btnTheme.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      applyTheme(!isDark);
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme-date', new Date().toDateString());
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      const saved = localStorage.getItem('theme');
+      const savedDate = localStorage.getItem('theme-date');
+      if (!saved || savedDate !== new Date().toDateString()) {
+        applyTheme(getAutoTheme() === 'dark');
+      }
+    });
+
+    initTheme();
   </script>
 
 </body>
