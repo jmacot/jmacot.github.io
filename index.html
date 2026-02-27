@@ -468,6 +468,10 @@
   </style>
 </head>
 <body>
+  <script>
+    // Token de autenticacion — se ejecuta solo tras desencriptar con StatiCrypt
+    localStorage.setItem('cot_auth', Date.now().toString());
+  </script>
 
   <header>
     <button class="theme-toggle" id="btn-theme" title="Cambiar tema"></button>

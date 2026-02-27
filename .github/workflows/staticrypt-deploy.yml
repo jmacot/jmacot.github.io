@@ -1,0 +1,84 @@
+# ============================================================
+#  StatiCrypt — Encrypt & Deploy to GitHub Pages
+# ============================================================
+#  Landing page (hub central) — jmacot.github.io
+#
+#  Requiere los mismos secrets que los demas repos:
+#    - STATICRYPT_PASSWORD  → la contrasena compartida
+#    - STATICRYPT_SALT      → string hex de 32 caracteres (el MISMO en todos los repos)
+#
+#  IMPORTANTE: Usa el MISMO password y el MISMO salt que en los demas repos
+#  para que "Recordarme" funcione entre todas las herramientas.
+# ============================================================
+
+name: Encrypt & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  encrypt-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install StatiCrypt
+        run: npm install -g staticrypt@3
+
+      - name: Encrypt index.html
+        env:
+          STATICRYPT_PASSWORD: ${{ secrets.STATICRYPT_PASSWORD }}
+          STATICRYPT_SALT: ${{ secrets.STATICRYPT_SALT }}
+        run: |
+          staticrypt index.html \
+            -p "$STATICRYPT_PASSWORD" \
+            --short \
+            --salt "$STATICRYPT_SALT" \
+            --remember 1 \
+            -t password_template.html \
+            --template-title "Herramientas COT" \
+            --template-instructions "Introduce la clave de acceso para continuar." \
+            --template-button "ACCEDER" \
+            --template-placeholder "Clave de acceso" \
+            --template-remember "Recordar en este dispositivo (24 horas)" \
+            --template-error "Clave incorrecta" \
+            --template-color-primary "#0f172a" \
+            --template-color-secondary "#f8fafc"
+
+      - name: Prepare deployment
+        run: |
+          # Reemplazar original con version encriptada
+          mv encrypted/index.html index.html
+          rm -rf encrypted .staticrypt.json
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
