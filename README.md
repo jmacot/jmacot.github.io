@@ -6,7 +6,7 @@
 
 [![Sitio web](https://img.shields.io/badge/web-jmacot.github.io-1a3a5c?style=for-the-badge&logo=github&logoColor=white)](https://jmacot.github.io)
 [![Aplicaciones](https://img.shields.io/badge/apps-7-16a34a?style=for-the-badge)]()
-[![Licencia](https://img.shields.io/badge/licencia-MIT-blue?style=for-the-badge)]()
+[![Licencia](https://img.shields.io/badge/licencia-All_Rights_Reserved-red?style=for-the-badge)]()
 
 ---
 
@@ -105,7 +105,7 @@ Cada herramienta vive en su propio repositorio:
 
 ## Licencia
 
-MIT — consulta el archivo [LICENSE](LICENSE) para más detalles.
+All Rights Reserved — consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
