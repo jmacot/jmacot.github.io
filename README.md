@@ -59,13 +59,19 @@ HTML5 + CSS3 + JavaScript vanilla
 - **Responsive** — adaptadas a móvil, tablet y escritorio.
 - **Modo oscuro** — landing page y todas las apps con detección automática y toggle manual.
 - **Offline-ready** — funcionan sin conexión tras la primera carga.
+- **Acceso protegido** — landing page encriptada con StatiCrypt. Sesión de 24 horas compartida con todas las apps.
 
 ---
 
-## Inicio rápido
+## Acceso
 
-1. Visita **[jmacot.github.io](https://jmacot.github.io)** y elige una herramienta.
-2. O clona cualquier repositorio individual y abre el `index.html` en tu navegador.
+El portal está protegido por contraseña mediante [StatiCrypt](https://github.com/robinmoisson/staticrypt).
+
+1. Visita **[jmacot.github.io](https://jmacot.github.io)** e introduce la clave de acceso.
+2. Una vez autenticado, puedes acceder a todas las herramientas sin volver a introducir la contraseña (sesión de 24 horas).
+3. Si intentas acceder directamente a una herramienta sin pasar por el portal, serás redirigido automáticamente.
+
+> Para desarrollo local, clona cualquier repositorio y abre el `index.html` en tu navegador.
 
 ```bash
 git clone https://github.com/jmacot/plantillas-qx.git
@@ -79,6 +85,8 @@ open plantillas-qx/index.html
 ```
 jmacot.github.io/          ← este repo (portal principal)
 ├── index.html              ← landing page con filtros por categoría
+├── password_template.html  ← plantilla de login StatiCrypt
+├── .github/workflows/      ← workflow de encriptación y despliegue
 ├── LICENSE
 ├── .gitignore
 └── README.md
