@@ -23,28 +23,28 @@
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **Plantillas Quirúrgicas COT** | 78 plantillas de notas operatorias y tratamientos al alta en 5 regiones anatómicas. Diseño premium con modo oscuro. | [Abrir app](https://jmacot.github.io/plantillas-qx) \| [Repo](https://github.com/jmacot/plantillas-qx) |
+| **Plantillas Quirúrgicas COT** | Más de 60 notas operatorias y tratamientos al alta listos para usar. Elige el procedimiento, personaliza los datos y copia el texto a la historia clínica. | [Abrir app](https://jmacot.github.io/plantillas-qx) \| [Repo](https://github.com/jmacot/plantillas-qx) |
 
 ### 🦴 Planificación
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **CPAK Planner** | Clasificación CPAK y planificación de alineación coronal en artroplastia total de rodilla. Calcula aHKA, JLO, JLCA y fenotipo. | [Abrir app](https://jmacot.github.io/CPAK) \| [Repo](https://github.com/jmacot/CPAK) |
-| **Analizador de Planning** | Analiza el planning mensual del servicio de COT. Dashboard D3.js, comparador interactivo, radar, rankings y exportación PDF/ICS. | [Abrir app](https://jmacot.github.io/planning-cot) \| [Repo](https://github.com/jmacot/planning-cot) |
+| **CPAK Planner** | Planifica la alineación coronal en prótesis total de rodilla. Introduce las medidas radiológicas y obtén la clasificación CPAK con el fenotipo del paciente. | [Abrir app](https://jmacot.github.io/CPAK) \| [Repo](https://github.com/jmacot/CPAK) |
+| **Analizador de Planning** | Visualiza el planning mensual del servicio. Consulta tu calendario, compara la carga de guardias entre compañeros y revisa la retribución estimada. | [Abrir app](https://jmacot.github.io/planning-cot) \| [Repo](https://github.com/jmacot/planning-cot) |
 
 ### 📝 Documentación
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **Consentimientos Informados** | +210 consentimientos informados de SECOT y SAS organizados por patología con buscador en tiempo real. | [Abrir app](https://jmacot.github.io/consentimientos) \| [Repo](https://github.com/jmacot/consentimientos) |
-| **Solicitud de Material Externo** | Formulario para solicitar material quirúrgico externo. 8 proveedores, catálogo de 30+ materiales y generación de PDF. | [Abrir app](https://jmacot.github.io/Material-Externo) \| [Repo](https://github.com/jmacot/Material-Externo) |
+| **Consentimientos Informados** | Accede a más de 210 consentimientos informados de SECOT y SAS. Busca por patología o navega por categorías para encontrar el documento que necesitas. | [Abrir app](https://jmacot.github.io/consentimientos) \| [Repo](https://github.com/jmacot/consentimientos) |
+| **Solicitud de Material Externo** | Solicita material quirúrgico externo en segundos. Elige casa comercial, selecciona el material del catálogo y genera el documento listo para enviar. | [Abrir app](https://jmacot.github.io/Material-Externo) \| [Repo](https://github.com/jmacot/Material-Externo) |
 
 ### 💰 Administración
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **Calculadora de Guardias** | Calcula retribución bruta, neta e IRPF de guardias médicas. 5 configuraciones: HSJD, Vithas, SAS y combinadas. Layout 2 columnas en desktop. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
-| **Analizador de Nómina** | Analiza nóminas del SAS en PDF. Desglose de devengos, deducciones y empresa. Multi-nómina con gráficos de evolución. | [Abrir app](https://jmacot.github.io/nominas-cot) \| [Repo](https://github.com/jmacot/nominas-cot) |
+| **Calculadora de Guardias** | Calcula lo que vas a cobrar por tus guardias. Selecciona los días en el calendario y consulta el bruto, neto e IRPF para cada centro hospitalario. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
+| **Analizador de Nómina** | Entiende tu nómina mes a mes. Consulta qué significa cada concepto, cuánto has cobrado y cómo evoluciona tu salario. | [Abrir app](https://jmacot.github.io/nominas-cot) \| [Repo](https://github.com/jmacot/nominas-cot) |
 
 ---
 
