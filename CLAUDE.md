@@ -156,6 +156,15 @@
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
   <meta name="description" content="{DESCRIPCION}" />
+  <meta name="theme-color" id="meta-theme" content="#0f172a" />
+  <meta property="og:title" content="{TITULO}" />
+  <meta property="og:description" content="{DESCRIPCION}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jmacot.github.io/{REPO}/" />
+  <meta property="og:image" content="https://jmacot.github.io/{REPO}/icon.svg" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -221,14 +230,23 @@
 
     @media (max-width: 600px) {
       header { padding: 40px 24px 36px; }
+      header::before, header::after { display: none; }
       main { padding: 40px 20px 60px; }
       .back-home { padding: 4px 8px; font-size: 10px; top: 10px; left: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <a class="back-home" href="https://jmacot.github.io/" title="Volver al inicio">← Inicio</a>
+    <button class="theme-toggle" id="btn-theme" aria-label="Cambiar a modo oscuro" title="Cambiar tema"></button>
     <div class="header-label">{SECCION}</div>
     <h1>{TITULO}<br><em>{SUBTITULO}</em></h1>
     <p>{DESCRIPCION}</p>
@@ -241,6 +259,11 @@
   </footer>
   <script>
     // JavaScript
+    // — Theme toggle (Sistema A: #0f172a light, #152238 dark) —
+    // applyTheme() debe incluir:
+    //   var metaTheme = document.getElementById('meta-theme');
+    //   btnTheme.setAttribute('aria-label', dark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+    //   if (metaTheme) metaTheme.setAttribute('content', dark ? '#152238' : '#0f172a');
   </script>
 </body>
 </html>
@@ -259,7 +282,16 @@
   <link rel="apple-touch-icon" href="icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="{NOMBRE_CORTO}">
-  <meta name="theme-color" content="#1a3a5c">
+  <meta name="description" content="{DESCRIPCION}" />
+  <meta name="theme-color" id="meta-theme" content="#1a3a5c">
+  <meta property="og:title" content="{TITULO}" />
+  <meta property="og:description" content="{DESCRIPCION}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jmacot.github.io/{REPO}/" />
+  <meta property="og:image" content="https://jmacot.github.io/{REPO}/icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -327,12 +359,20 @@
     @media (max-width: 600px) {
       .back-home { padding: 4px 8px; font-size: 10px; top: 6px; left: 6px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
 <div class="app-container">
   <a class="back-home" href="https://jmacot.github.io/" title="Volver al inicio">← Inicio</a>
   <div class="app-header">
+    <button class="theme-toggle" id="btn-theme" aria-label="Cambiar a modo oscuro" title="Cambiar tema"></button>
     <h1>{TITULO}</h1>
     <p>{DESCRIPCION}</p>
   </div>
@@ -840,7 +880,7 @@ font-size: clamp(1.3rem, 3vw, 1.7rem); /* Sistema B h1 */
 ### HTML — boton toggle
 
 ```html
-<button class="theme-toggle" id="btn-theme" title="Cambiar tema"></button>
+<button class="theme-toggle" id="btn-theme" aria-label="Cambiar a modo oscuro" title="Cambiar tema"></button>
 ```
 
 ```css
@@ -860,12 +900,19 @@ font-size: clamp(1.3rem, 3vw, 1.7rem); /* Sistema B h1 */
 const btnTheme = document.getElementById('btn-theme');
 
 function applyTheme(dark) {
+  var metaTheme = document.getElementById('meta-theme');
   if (dark) {
     document.documentElement.setAttribute('data-theme', 'dark');
     btnTheme.textContent = '☀️';
+    btnTheme.setAttribute('aria-label', 'Cambiar a modo claro');
+    // Sistema B: '#0a1628' | Sistema A: '#152238'
+    if (metaTheme) metaTheme.setAttribute('content', '#0a1628');
   } else {
     document.documentElement.removeAttribute('data-theme');
     btnTheme.textContent = '🌙';
+    btnTheme.setAttribute('aria-label', 'Cambiar a modo oscuro');
+    // Sistema B: '#1a3a5c' | Sistema A: '#0f172a'
+    if (metaTheme) metaTheme.setAttribute('content', '#1a3a5c');
   }
 }
 
@@ -967,7 +1014,7 @@ MIT
 ```html
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="{NOMBRE_CORTO}">
-<meta name="theme-color" content="#1a3a5c">
+<meta name="theme-color" id="meta-theme" content="#1a3a5c">
 ```
 
 ### Al publicar una nueva herramienta
