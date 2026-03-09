@@ -7,6 +7,19 @@
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
   <meta name="description" content="Herramientas clínicas para Cirugía Ortopédica y Traumatología" />
+  <meta name="theme-color" id="meta-theme" content="#0f172a" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Herramientas · jmacot" />
+  <meta property="og:description" content="Aplicaciones web de uso clínico y administrativo para Cirugía Ortopédica y Traumatología" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jmacot.github.io/" />
+  <meta property="og:image" content="https://jmacot.github.io/icon.svg" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -185,6 +198,44 @@
       color: white;
     }
 
+    .filter-count {
+      font-size: 9px;
+      font-weight: 600;
+      opacity: 0.6;
+      margin-left: 2px;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-muted);
+      pointer-events: none;
+    }
+    #buscar {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #buscar:focus {
+      border-color: var(--ink-muted);
+      box-shadow: 0 0 0 3px rgb(15 23 42 / 0.06);
+    }
+    #buscar::placeholder { color: var(--ink-muted); opacity: 0.6; }
+
     .filter-btn[data-tag="todos"].active {
       background: var(--ink);
       border-color: var(--ink);
@@ -244,6 +295,16 @@
       display: none;
     }
 
+    .card.fading-out {
+      opacity: 0;
+      transform: translateY(8px) scale(0.97);
+    }
+
+    .card.fading-in {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
     .card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-hover);
@@ -266,8 +327,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
     }
+    .card-icon svg { width: 22px; height: 22px; flex-shrink: 0; }
 
     .card-meta {
       display: flex;
@@ -474,17 +535,25 @@
 
     @media (max-width: 600px) {
       header { padding: 40px 24px 36px; }
+      header::before, header::after { display: none; }
       main { padding: 40px 20px 60px; }
       .grid { grid-template-columns: 1fr; }
       .filters { gap: 6px; }
       .filter-btn { font-size: 10px; padding: 6px 12px; }
       .theme-toggle { width: 34px; height: 34px; font-size: 1rem; top: 10px; right: 10px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <button class="theme-toggle" id="btn-theme" title="Cambiar tema"></button>
+    <button class="theme-toggle" id="btn-theme" title="Cambiar tema" aria-label="Cambiar a modo oscuro"></button>
     <div class="header-label">Herramientas clínicas</div>
     <h1>Herramientas<br><em>para Cirugía Ortopédica y Traumatología</em></h1>
     <p>Aplicaciones web de uso clínico y administrativo para cirugía ortopédica.</p>
@@ -507,12 +576,17 @@
       <button class="filter-btn" data-tag="administracion" onclick="filtrar('administracion')">Administración</button>
     </div>
 
+    <div class="search-wrap">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="buscar" placeholder="Buscar herramienta..." autocomplete="off" />
+    </div>
+
     <div class="grid">
 
       <!-- PLANTILLAS QUIRÚRGICAS -->
       <a class="card" data-tag="quirofano" href="https://jmacot.github.io/plantillas-qx" target="_blank" style="animation-delay: 0s">
         <div class="card-meta">
-          <div class="card-icon">📋</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-quirofano)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -527,7 +601,7 @@
       <!-- PROTOCOLOS REHABILITACION -->
       <a class="card" data-tag="pacientes" href="https://jmacot.github.io/rehabilitacion-cot" target="_blank" style="animation-delay: 0.05s">
         <div class="card-meta">
-          <div class="card-icon" style="--card-icon-bg: var(--c-pacientes-light)">
+          <div class="card-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-pacientes)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
           </div>
           <div class="card-arrow">
@@ -544,7 +618,7 @@
       <!-- KNEE ALIGN -->
       <a class="card" data-tag="planificacion" href="https://jmacot.github.io/knee-align" target="_blank" style="animation-delay: 0.1s">
         <div class="card-meta">
-          <div class="card-icon">📐</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-planificacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -559,7 +633,7 @@
       <!-- PLANNING COT -->
       <a class="card" data-tag="administracion" href="https://jmacot.github.io/planning-cot" target="_blank" style="animation-delay: 0.15s">
         <div class="card-meta">
-          <div class="card-icon">📊</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-administracion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16V12"/><path d="M12 16V8"/><path d="M16 16v-2"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -574,7 +648,7 @@
       <!-- MATERIAL EXTERNO -->
       <a class="card" data-tag="documentacion" href="https://jmacot.github.io/Material-Externo" target="_blank" style="animation-delay: 0.2s">
         <div class="card-meta">
-          <div class="card-icon">🔩</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-documentacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -589,7 +663,7 @@
       <!-- CALCULADORA GUARDIAS -->
       <a class="card" data-tag="administracion" href="https://jmacot.github.io/calculadora-guardias" target="_blank" style="animation-delay: 0.25s">
         <div class="card-meta">
-          <div class="card-icon">🏥</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-administracion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -604,7 +678,7 @@
       <!-- CONSENTIMIENTOS INFORMADOS -->
       <a class="card" data-tag="documentacion" href="https://jmacot.github.io/consentimientos" target="_blank" style="animation-delay: 0.3s">
         <div class="card-meta">
-          <div class="card-icon">📝</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-documentacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -619,7 +693,7 @@
       <!-- CPAK PLANNER -->
       <a class="card" data-tag="planificacion" href="https://jmacot.github.io/CPAK" target="_blank" style="animation-delay: 0.35s">
         <div class="card-meta">
-          <div class="card-icon">🦴</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-planificacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
           <div class="card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </div>
@@ -631,25 +705,10 @@
         </div>
       </a>
 
-      <!-- DEFORMIDADES CORONALES -->
-      <a class="card" data-tag="planificacion" href="https://jmacot.github.io/deformidad-coronal" target="_blank" style="animation-delay: 0.35s">
-        <div class="card-meta">
-          <div class="card-icon">📐</div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Planificación</div>
-          <h2>Deformidades Coronales</h2>
-          <p>Analisis de alineacion coronal del miembro inferior con el algoritmo AKUMA. Calcula componentes de deformidad, diagnostico diferencial (HTO/DFO/DLO/UKA) y planificacion de correccion.</p>
-        </div>
-      </a>
-
       <!-- PLACEHOLDER -->
       <div class="card placeholder" data-tag="none" style="animation-delay: 0.45s">
         <div class="card-meta">
-          <div class="card-icon">＋</div>
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
         </div>
         <div class="card-content">
           <div class="card-tag">En proceso</div>
@@ -669,19 +728,74 @@
     // ─────────────────────────────────────────────
     //  FILTROS
     // ─────────────────────────────────────────────
+    const allCards = document.querySelectorAll('.card:not(.placeholder)');
+
+    let filterTimer;
     function filtrar(tag) {
+      clearTimeout(filterTimer);
+      document.getElementById('buscar').value = '';
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tag === tag);
       });
-      document.querySelectorAll('.card').forEach(card => {
-        if (tag === 'todos') {
-          card.classList.remove('hidden');
-        } else {
-          const cardTag = card.dataset.tag;
-          card.classList.toggle('hidden', cardTag !== tag && cardTag !== 'none');
+      const cards = document.querySelectorAll('.card');
+      // Fade out cards that will hide
+      cards.forEach(card => {
+        const cardTag = card.dataset.tag;
+        const shouldShow = tag === 'todos' || cardTag === tag || cardTag === 'none';
+        if (!shouldShow && !card.classList.contains('hidden')) {
+          card.classList.add('fading-out');
         }
       });
+      // After fade out, toggle display and fade in new ones
+      filterTimer = setTimeout(() => {
+        cards.forEach(card => {
+          const cardTag = card.dataset.tag;
+          const shouldShow = tag === 'todos' || cardTag === tag || cardTag === 'none';
+          card.classList.remove('fading-out');
+          if (shouldShow) {
+            card.classList.remove('hidden');
+            card.classList.add('fading-in');
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+              card.classList.remove('fading-in');
+            }));
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }, 200);
     }
+
+    // Inject count badges
+    (function initCounts() {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const tag = btn.dataset.tag;
+        const count = tag === 'todos'
+          ? allCards.length
+          : document.querySelectorAll(`.card[data-tag="${tag}"]:not(.placeholder)`).length;
+        btn.insertAdjacentHTML('beforeend', ` <span class="filter-count">${count}</span>`);
+      });
+    })();
+
+    // ─────────────────────────────────────────────
+    //  BUSQUEDA
+    // ─────────────────────────────────────────────
+    function normalizar(str) {
+      return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    const inputBuscar = document.getElementById('buscar');
+    inputBuscar.addEventListener('input', () => {
+      const q = normalizar(inputBuscar.value.trim());
+      const activeTag = document.querySelector('.filter-btn.active')?.dataset.tag || 'todos';
+      document.querySelectorAll('.card').forEach(card => {
+        if (card.classList.contains('placeholder')) return;
+        const title = normalizar(card.querySelector('h2')?.textContent || '');
+        const desc = normalizar(card.querySelector('p')?.textContent || '');
+        const matchSearch = !q || title.includes(q) || desc.includes(q);
+        const matchTag = activeTag === 'todos' || card.dataset.tag === activeTag;
+        card.classList.toggle('hidden', !(matchSearch && matchTag));
+      });
+    });
 
     // ─────────────────────────────────────────────
     //  DARK MODE
@@ -689,12 +803,17 @@
     const btnTheme = document.getElementById('btn-theme');
 
     function applyTheme(dark) {
+      const metaTheme = document.getElementById('meta-theme');
       if (dark) {
         document.documentElement.setAttribute('data-theme', 'dark');
         btnTheme.textContent = '\u2600\uFE0F';
+        btnTheme.setAttribute('aria-label', 'Cambiar a modo claro');
+        metaTheme.setAttribute('content', '#152238');
       } else {
         document.documentElement.removeAttribute('data-theme');
         btnTheme.textContent = '\uD83C\uDF19';
+        btnTheme.setAttribute('aria-label', 'Cambiar a modo oscuro');
+        metaTheme.setAttribute('content', '#0f172a');
       }
     }
 
