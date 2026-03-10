@@ -47,13 +47,13 @@
 
 ```css
 :root {
-  --bg: #f8fafc;
+  --bg: #e8edf4;
   --surface: #ffffff;
   --ink: #0f172a;
   --ink-muted: #64748b;
   --border: #e2e8f0;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.09), 0 2px 4px -2px rgb(0 0 0 / 0.09);
   --shadow-hover: 0 25px 50px -12px rgb(0 0 0 / 0.12);
   --radius: 20px;
 
@@ -95,9 +95,9 @@
 
 ```css
 :root {
-  --bg: #f1f5f9;
+  --bg: #e5eaf2;
   --surface: #ffffff;
-  --surface2: #e8eef4;
+  --surface2: #dbe2ec;
   --border: #e2e8f0;
   --border-light: #e5e7eb;
   --accent: #1a3a5c;
@@ -113,7 +113,7 @@
   --red: #dc2626;
   --red-light: #fee2e2;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08);
   --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1);
   --radius-sm: 8px;
   --radius: 16px;
@@ -303,7 +303,7 @@
       --amber: #c0540a; --amber-light: #fef3c7;
       --red: #dc2626; --red-light: #fee2e2;
       --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08);
       --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1);
       --radius-sm: 8px; --radius: 16px; --radius-lg: 24px;
       --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
