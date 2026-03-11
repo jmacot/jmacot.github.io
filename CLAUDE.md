@@ -168,7 +168,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #e8edf4;
       --surface: #ffffff;
       --ink: #0f172a;
       --ink-muted: #64748b;
@@ -295,7 +295,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f1f5f9; --surface: #ffffff; --surface2: #e8eef4;
+      --bg: #e5eaf2; --surface: #ffffff; --surface2: #dbe2ec;
       --border: #e2e8f0; --border-light: #e5e7eb;
       --accent: #1a3a5c; --accent-light: #eef2f7; --accent-hover: #14304f;
       --text: #222222; --text-muted: #555555; --text-light: #888888;

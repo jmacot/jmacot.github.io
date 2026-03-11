@@ -23,11 +23,11 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #d9e1ec;
+      --bg: #e8edf4;
       --surface: #ffffff;
       --ink: #0f172a;
       --ink-muted: #64748b;
-      --border: #c9d3e0;
+      --border: #e2e8f0;
 
       /* Sombras modernas */
       --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
@@ -269,7 +269,7 @@
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -543,6 +543,10 @@
       .theme-toggle { width: 34px; height: 34px; font-size: 1rem; top: 10px; right: 10px; }
     }
 
+    /* Accesibilidad — focus visible para navegacion por teclado */
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -567,7 +571,7 @@
     <div class="section-label">Aplicaciones disponibles</div>
 
     <!-- FILTROS POR ETIQUETA -->
-    <div class="filters">
+    <div class="filters" role="navigation" aria-label="Filtrar herramientas">
       <button class="filter-btn active" data-tag="todos" onclick="filtrar('todos')">Todos</button>
       <button class="filter-btn" data-tag="quirofano" onclick="filtrar('quirofano')">Quirófano</button>
       <button class="filter-btn" data-tag="planificacion" onclick="filtrar('planificacion')">Planificación</button>
