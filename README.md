@@ -5,7 +5,7 @@
 **Portal web con herramientas clínicas y administrativas para el día a día en COT**
 
 [![Sitio web](https://img.shields.io/badge/web-jmacot.github.io-1a3a5c?style=for-the-badge&logo=github&logoColor=white)](https://jmacot.github.io)
-[![Aplicaciones](https://img.shields.io/badge/apps-7-16a34a?style=for-the-badge)]()
+[![Aplicaciones](https://img.shields.io/badge/apps-11-16a34a?style=for-the-badge)]()
 [![Licencia](https://img.shields.io/badge/licencia-All_Rights_Reserved-red?style=for-the-badge)]()
 
 ---
@@ -23,12 +23,13 @@
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
-| **Plantillas Quirúrgicas COT** | Más de 60 notas operatorias y tratamientos al alta listos para usar. Elige el procedimiento, personaliza los datos y copia el texto a la historia clínica. | [Abrir app](https://jmacot.github.io/plantillas-qx) \| [Repo](https://github.com/jmacot/plantillas-qx) |
+| **Plantillas Quirúrgicas COT** | Más de 87 notas operatorias y tratamientos al alta listos para usar. Elige el procedimiento, personaliza los datos y copia el texto a la historia clínica. | [Abrir app](https://jmacot.github.io/plantillas-qx) \| [Repo](https://github.com/jmacot/plantillas-qx) |
 
 ### 🦴 Planificación
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
+| **Knee Align** | Análisis de alineación coronal de rodilla con algoritmos AKUMA/AKULA. Diagnóstico diferencial, planificación de corrección y exportación PDF del informe preoperatorio. | [Abrir app](https://jmacot.github.io/knee-align) \| [Repo](https://github.com/jmacot/knee-align) |
 | **CPAK Planner** | Planifica la alineación coronal en prótesis total de rodilla. Introduce las medidas radiológicas y obtén la clasificación CPAK con el fenotipo del paciente. | [Abrir app](https://jmacot.github.io/CPAK) \| [Repo](https://github.com/jmacot/CPAK) |
 | **Analizador de Planning** | Visualiza el planning mensual del servicio. Consulta tu calendario, compara la carga de guardias entre compañeros y revisa la retribución estimada. | [Abrir app](https://jmacot.github.io/planning-cot) \| [Repo](https://github.com/jmacot/planning-cot) |
 
@@ -39,12 +40,25 @@
 | **Consentimientos Informados** | Accede a más de 210 consentimientos informados de SECOT y SAS. Busca por patología o navega por categorías para encontrar el documento que necesitas. | [Abrir app](https://jmacot.github.io/consentimientos) \| [Repo](https://github.com/jmacot/consentimientos) |
 | **Solicitud de Material Externo** | Solicita material quirúrgico externo en segundos. Elige casa comercial, selecciona el material del catálogo y genera el documento listo para enviar. | [Abrir app](https://jmacot.github.io/Material-Externo) \| [Repo](https://github.com/jmacot/Material-Externo) |
 
+### 🩺 Clínica
+
+| App | Descripción | Enlace |
+|-----|-------------|--------|
+| **Knee Scores** | 6 scores clínicos validados de rodilla (KOOS, WOMAC, Kujala, Lysholm, IKDC, KSS). Cálculo automático e interpretación por rangos. | [Abrir app](https://jmacot.github.io/knee-scores) \| [Repo](https://github.com/jmacot/knee-scores) |
+| **Rehabilitación COT** | 64 protocolos de rehabilitación postquirúrgica + 23 programas SERMEF. Timeline D3.js, cálculo de fase automático y vídeos de ejercicios. | [Abrir app](https://jmacot.github.io/rehabilitacion-cot) \| [Repo](https://github.com/jmacot/rehabilitacion-cot) |
+| **Información para Pacientes** | Portal con guías de información y rehabilitación para pacientes de cirugía de rodilla (PTR y lesiones meniscales). | [Abrir app](https://jmacot.github.io/pacientes) \| [Repo](https://github.com/jmacot/pacientes) |
+
 ### 💰 Administración
 
 | App | Descripción | Enlace |
 |-----|-------------|--------|
 | **Calculadora de Guardias** | Calcula lo que vas a cobrar por tus guardias. Selecciona los días en el calendario y consulta el bruto, neto e IRPF para cada centro hospitalario. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
-| **Analizador de Nómina** | Entiende tu nómina mes a mes. Consulta qué significa cada concepto, cuánto has cobrado y cómo evoluciona tu salario. | [Abrir app](https://jmacot.github.io/nominas-cot) \| [Repo](https://github.com/jmacot/nominas-cot) |
+
+### 🎨 Herramientas
+
+| App | Descripción | Enlace |
+|-----|-------------|--------|
+| **IlustraCOT** | Generador de prompts para ilustraciones médicas de cirugía ortopédica. 5 estilos visuales y categorías quirúrgicas. | [Abrir app](https://jmacot.github.io/ilustracot) \| [Repo](https://github.com/jmacot/ilustracot) |
 
 ---
 
@@ -95,10 +109,14 @@ Cada herramienta vive en su propio repositorio:
 ├── calculadora-guardias/
 ├── consentimientos/
 ├── CPAK/
+├── Ilustracot/
+├── knee-align/
+├── knee-scores/
 ├── Material-Externo/
-├── nominas-cot/
+├── pacientes/
 ├── planning-cot/
-└── plantillas-qx/
+├── plantillas-qx/
+└── rehabilitacion-cot/
 ```
 
 ---
