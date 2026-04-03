@@ -46,7 +46,7 @@
     }
 
     [data-theme="dark"] {
-      --bg: #0f172a;
+      --bg: #131c2e;
       --surface: #1e293b;
       --ink: #f1f5f9;
       --ink-muted: #94a3b8;
@@ -61,7 +61,19 @@
       --c-pacientes-light: rgba(236, 72, 153, 0.15);
     }
 
+    html { scroll-behavior: smooth; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px;
+      background: var(--ink); color: var(--bg);
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; z-index: 1000;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -195,7 +207,7 @@
       font-size: 11px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 7px 16px;
+      padding: 12px 16px;
       border-radius: 999px;
       border: 1.5px solid var(--border);
       background: transparent;
@@ -563,6 +575,7 @@
 
     /* Accesibilidad — focus visible para navegacion por teclado */
     :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .card:focus-visible { outline: 2px solid var(--card-accent, var(--ink)); outline-offset: 3px; }
     input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -570,10 +583,12 @@
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
       }
+      .hero-glow { animation: none; }
     }
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
   <header>
     <div class="hero-dot-grid"></div>
     <div class="hero-glow hero-glow-1"></div>
@@ -612,7 +627,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <div class="section-label">Aplicaciones disponibles</div>
 
     <!-- FILTROS POR ETIQUETA -->
@@ -627,7 +642,7 @@
 
     <div class="search-wrap">
       <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="search" id="buscar" placeholder="Buscar herramienta..." autocomplete="off" />
+      <input type="search" id="buscar" placeholder="Buscar herramienta..." autocomplete="off" aria-label="Buscar herramienta" />
     </div>
 
     <div class="grid">
