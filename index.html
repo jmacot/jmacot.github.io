@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suite COT · jmacot</title>
+  <title>Herramientas COT · jmacot</title>
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
   <meta name="description" content="Herramientas clínicas para Cirugía Ortopédica y Traumatología" />
   <meta name="theme-color" id="meta-theme" content="#0f172a" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Suite COT · jmacot" />
+  <meta property="og:title" content="Herramientas COT · jmacot" />
   <meta property="og:description" content="Aplicaciones web de uso clínico y administrativo para Cirugía Ortopédica y Traumatología" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jmacot.github.io/" />
@@ -180,9 +180,10 @@
     header {
       background: #0f172a;
       color: white;
-      padding: 28px 32px 24px;
+      padding: 48px 48px 40px;
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
 
     .hero-dot-grid {
@@ -212,22 +213,24 @@
 
     .header-top {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
       position: relative;
       z-index: 1;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .header-brand {
       display: flex;
-      align-items: baseline;
+      flex-direction: column;
+      align-items: center;
       gap: 10px;
     }
 
     header h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.3rem;
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 400;
       color: white;
     }
@@ -265,7 +268,8 @@
 
     .header-stats {
       display: flex;
-      gap: 20px;
+      justify-content: center;
+      gap: 24px;
       position: relative;
       z-index: 1;
     }
@@ -400,7 +404,7 @@
       min-height: 200px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       box-shadow: 0 8px 32px rgba(12,74,110,0.25);
     }
     .cell-hero::before { display: none; }
@@ -450,7 +454,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
     }
     .cell-medium h2 { font-size: 1.2rem; margin-bottom: 4px; }
 
@@ -536,12 +540,12 @@
     /*  RESPONSIVE                               */
     /* ══════════════════════════════════════════ */
     @media (max-width: 600px) {
-      header { padding: 24px 20px 20px; }
-      header h1 { font-size: 1.1rem; }
+      header { padding: 52px 20px 28px; }
+      header h1 { font-size: 1.6rem; }
       .header-stats { gap: 14px; }
       .header-stat-val { font-size: 1rem; }
       .hero-glow { display: none; }
-      .sky-toggle { --toggle-size: 18px; top: 10px; right: 10px; }
+      .sky-toggle { --toggle-size: 13px; top: 10px; right: 10px; }
 
       main { padding: 12px 12px 32px; }
       .bento { gap: 10px; }
@@ -616,7 +620,7 @@
 
     <div class="header-top">
       <div class="header-brand">
-        <h1>Suite <span>COT</span></h1>
+        <h1>Herramientas <span>COT</span></h1>
         <div class="header-badge">
           <span class="dot"></span>
           jmacot.github.io

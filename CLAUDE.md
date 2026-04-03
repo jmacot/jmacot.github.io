@@ -747,8 +747,10 @@
 - Sin etiquetas de categoria en las cards
 - Flecha CTA solo en la hero card
 - Sin filtros, sin busqueda, sin placeholder card
-- Header compacto: "Suite COT" (gradiente) + badge + stats inline (60+ / 170+ / 64 / 8)
+- Header centrado: "Herramientas COT" (COT en gradiente) + badge + stats inline centradas (60+ / 170+ / 64 / 8)
+- Cards hero y medium con texto centrado verticalmente (`justify-content: center`)
 - Responsive movil: bento pasa a 1 columna, small-row a 2 col, compact-row a 1 col
+- Sky toggle en movil: `--toggle-size: 13px` (reducido para no cantar), header con `padding-top: 52px` para dejar espacio
 
 **Anadir nueva app:**
 - Uso bajo → small card (la fila pasa a 5 col, o nueva fila)
