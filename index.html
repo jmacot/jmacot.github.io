@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Herramientas · jmacot</title>
+  <title>Suite COT · jmacot</title>
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
   <link rel="apple-touch-icon" href="icon.svg" />
   <meta name="description" content="Herramientas clínicas para Cirugía Ortopédica y Traumatología" />
   <meta name="theme-color" id="meta-theme" content="#0f172a" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Herramientas · jmacot" />
+  <meta property="og:title" content="Suite COT · jmacot" />
   <meta property="og:description" content="Aplicaciones web de uso clínico y administrativo para Cirugía Ortopédica y Traumatología" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jmacot.github.io/" />
@@ -28,14 +28,12 @@
       --ink: #0f172a;
       --ink-muted: #64748b;
       --border: #e2e8f0;
-
-      /* Sombras modernas */
       --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
       --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
       --shadow-hover: 0 25px 50px -12px rgb(0 0 0 / 0.15);
-      --radius: 20px;
+      --radius: 16px;
+      --radius-lg: 20px;
 
-      /* Colores vibrantes por etiqueta */
       --c-quirofano: #0ea5e9;       --c-quirofano-light: #e0f2fe;
       --c-administracion: #8b5cf6;  --c-administracion-light: #ede9fe;
       --c-documentacion: #f59e0b;   --c-documentacion-light: #fef3c7;
@@ -81,440 +79,218 @@
       color: var(--ink);
       min-height: 100vh;
       padding: 0;
+      position: relative;
     }
 
-    /* ── HEADER ── */
+    /* ── MESH GRADIENT ANIMADO ── */
+    .mesh-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .mesh-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      will-change: transform;
+    }
+    .mesh-orb-1 {
+      width: 50vw; height: 50vw;
+      top: 10%; left: -10%;
+      background: rgba(14,165,233,0.25);
+      animation: orb1 18s ease-in-out infinite;
+    }
+    .mesh-orb-2 {
+      width: 45vw; height: 45vw;
+      top: 40%; right: -15%;
+      background: rgba(139,92,246,0.20);
+      animation: orb2 22s ease-in-out infinite;
+    }
+    .mesh-orb-3 {
+      width: 40vw; height: 40vw;
+      bottom: -5%; left: 30%;
+      background: rgba(13,148,136,0.18);
+      animation: orb3 20s ease-in-out infinite;
+    }
+    .mesh-orb-4 {
+      width: 35vw; height: 35vw;
+      top: 60%; left: 10%;
+      background: rgba(236,72,153,0.12);
+      animation: orb4 24s ease-in-out infinite;
+    }
+    .mesh-orb-5 {
+      width: 30vw; height: 30vw;
+      top: 5%; right: 20%;
+      background: rgba(245,158,11,0.12);
+      animation: orb5 19s ease-in-out infinite;
+    }
+
+    @keyframes orb1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(15vw, 10vh) scale(1.1); }
+      66%  { transform: translate(-5vw, 20vh) scale(0.95); }
+    }
+    @keyframes orb2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(-20vw, -10vh) scale(1.05); }
+      66%  { transform: translate(5vw, 15vh) scale(1.1); }
+    }
+    @keyframes orb3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(10vw, -15vh) scale(1.08); }
+      66%  { transform: translate(-15vw, -5vh) scale(0.92); }
+    }
+    @keyframes orb4 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(20vw, -10vh) scale(1.15); }
+    }
+    @keyframes orb5 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-15vw, 15vh) scale(1.1); }
+    }
+
+    /* Dot grid sobre el mesh */
+    .mesh-dots {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, var(--ink-muted) 0.5px, transparent 0.5px);
+      background-size: 32px 32px;
+      opacity: 0.06;
+    }
+
+    /* Dark mode — orbs mas tenues */
+    [data-theme="dark"] .mesh-orb-1 { background: rgba(14,165,233,0.12); }
+    [data-theme="dark"] .mesh-orb-2 { background: rgba(139,92,246,0.10); }
+    [data-theme="dark"] .mesh-orb-3 { background: rgba(13,148,136,0.08); }
+    [data-theme="dark"] .mesh-orb-4 { background: rgba(236,72,153,0.06); }
+    [data-theme="dark"] .mesh-orb-5 { background: rgba(245,158,11,0.06); }
+    [data-theme="dark"] .mesh-dots { opacity: 0.03; }
+
+    header, main, footer { position: relative; z-index: 1; }
+
+    /* ══════════════════════════════════════════ */
+    /*  HEADER — compacto                        */
+    /* ══════════════════════════════════════════ */
     header {
       background: #0f172a;
       color: white;
-      padding: 56px 48px 48px;
+      padding: 28px 32px 24px;
       position: relative;
       overflow: hidden;
     }
 
     .hero-dot-grid {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
-      background-size: 28px 28px;
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
       z-index: 0;
     }
     [data-theme="dark"] .hero-dot-grid {
-      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
     }
 
     .hero-glow {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
+      filter: blur(60px);
       z-index: 0;
       animation: glowPulse 6s ease-in-out infinite;
     }
-    .hero-glow-1 { top: -100px; right: -60px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%); }
-    .hero-glow-2 { bottom: -80px; left: 15%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%); animation-delay: 3s; }
-    .hero-glow-3 { top: 30%; left: 50%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(13,148,136,0.10) 0%, transparent 70%); animation-delay: 1.5s; }
+    .hero-glow-1 { top: -60px; right: -20px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(14,165,233,0.10) 0%, transparent 70%); }
+    .hero-glow-2 { bottom: -40px; left: 15%; width: 140px; height: 140px; background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%); animation-delay: 3s; }
 
     @keyframes glowPulse {
       0%, 100% { opacity: 0.6; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.08); }
     }
 
-    header h1 .highlight {
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 16px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: white;
+    }
+    header h1 span {
       background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .header-inner { position: relative; z-index: 1; }
-
-    .header-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 16px;
-    }
-
-    header h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.15;
-      margin-bottom: 12px;
-    }
-
-    header p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.65);
-      font-weight: 300;
-      max-width: 480px;
-    }
-
     .header-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.8);
-      margin-top: 24px;
+      gap: 5px;
       font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.35);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
     }
-
     .dot {
-      width: 6px; height: 6px;
+      width: 5px; height: 5px;
       border-radius: 50%;
-      background: #4caf7d;
-      animation: pulse 2s infinite;
+      background: #22c55e;
+      box-shadow: 0 0 4px rgba(34,197,94,0.5);
+      animation: pulse 2s ease-in-out infinite;
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
     }
 
-    /* ── MAIN ── */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 56px 32px 80px;
-    }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 20px;
-    }
-
-    /* ── FILTROS ── */
-    .filters {
+    .header-stats {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .filter-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1.5px solid var(--border);
-      background: transparent;
-      color: var(--ink-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--ink-muted);
-      color: var(--ink);
-    }
-
-    .filter-btn.active {
-      border-color: transparent;
-      color: white;
-    }
-
-    .filter-count {
-      font-size: 9px;
-      font-weight: 600;
-      opacity: 0.6;
-      margin-left: 2px;
-    }
-
-    /* ── SEARCH ── */
-    .search-wrap {
-      position: relative;
-      margin-bottom: 24px;
-    }
-    .search-icon {
-      position: absolute;
-      left: 16px; top: 50%;
-      transform: translateY(-50%);
-      color: var(--ink-muted);
-      pointer-events: none;
-    }
-    #buscar {
-      width: 100%;
-      padding: 12px 16px 12px 44px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: var(--ink);
-      background: var(--bg);
-      border: none;
-      border-radius: 999px;
-      outline: none;
-      box-shadow: 5px 5px 12px #ccd1db,
-                  -5px -5px 12px #edf2f8;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #buscar:focus {
-      background: var(--bg);
-      box-shadow: inset 4px 4px 10px #ccd1db,
-                  inset -4px -4px 10px #edf2f8;
-    }
-    #buscar::placeholder { color: var(--ink-muted); opacity: 0.6; }
-
-    .filter-btn[data-tag="todos"].active {
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .filter-btn[data-tag="quirofano"].active {
-      background: var(--c-quirofano);
-    }
-
-    .filter-btn[data-tag="administracion"].active {
-      background: var(--c-administracion);
-    }
-
-    .filter-btn[data-tag="documentacion"].active {
-      background: var(--c-documentacion);
-    }
-
-    .filter-btn[data-tag="planificacion"].active {
-      background: var(--c-planificacion);
-    }
-
-    .filter-btn[data-tag="pacientes"].active {
-      background: var(--c-pacientes);
-    }
-
-    /* ── CARDS ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
       gap: 20px;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      box-shadow: var(--shadow);
-      transition: var(--transition-smooth);
       position: relative;
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 1;
     }
-
-    .card.hidden {
-      display: none;
+    .header-stat { text-align: center; }
+    .header-stat-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: white;
+      display: block;
+      line-height: 1.2;
     }
-
-    .card.fading-out {
-      opacity: 0;
-      transform: translateY(8px) scale(0.97);
-    }
-
-    .card.fading-in {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--card-accent, var(--border));
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--card-accent);
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .card-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: var(--card-icon-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-icon svg { width: 22px; height: 22px; flex-shrink: 0; }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .card-tag {
+    .header-stat-lbl {
       font-family: 'DM Mono', monospace;
-      font-size: 10px;
+      font-size: 8px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--card-tag-color);
-      background: var(--card-tag-bg);
-      padding: 4px 10px;
-      border-radius: 999px;
-      align-self: flex-start;
+      color: rgba(255,255,255,0.35);
+    }
+    .header-stat-div {
+      width: 1px;
+      height: 28px;
+      background: rgba(255,255,255,0.08);
+      align-self: center;
     }
 
-    .card-arrow {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ink-muted);
-      transition: var(--transition-smooth);
-    }
-
-    .card-arrow svg {
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .card:hover .card-arrow {
-      background: var(--card-accent);
-      border-color: var(--card-accent);
-      color: white;
-    }
-
-    .card:hover .card-arrow svg {
-      transform: translateX(3px) scale(1.1);
-    }
-
-    .card h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--ink);
-    }
-
-    .card p {
-      font-size: 14px;
-      color: var(--ink-muted);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    /* ── VARIANTES POR ETIQUETA ── */
-    .card[data-tag="quirofano"] {
-      --card-accent: var(--c-quirofano);
-      --card-icon-bg: var(--c-quirofano-light);
-      --card-tag-color: var(--c-quirofano);
-      --card-tag-bg: var(--c-quirofano-light);
-    }
-
-    .card[data-tag="administracion"] {
-      --card-accent: var(--c-administracion);
-      --card-icon-bg: var(--c-administracion-light);
-      --card-tag-color: var(--c-administracion);
-      --card-tag-bg: var(--c-administracion-light);
-    }
-
-    .card[data-tag="documentacion"] {
-      --card-accent: var(--c-documentacion);
-      --card-icon-bg: var(--c-documentacion-light);
-      --card-tag-color: var(--c-documentacion);
-      --card-tag-bg: var(--c-documentacion-light);
-    }
-
-    .card[data-tag="planificacion"] {
-      --card-accent: var(--c-planificacion);
-      --card-icon-bg: var(--c-planificacion-light);
-      --card-tag-color: var(--c-planificacion);
-      --card-tag-bg: var(--c-planificacion-light);
-    }
-
-    .card[data-tag="pacientes"] {
-      --card-accent: var(--c-pacientes);
-      --card-icon-bg: var(--c-pacientes-light);
-      --card-tag-color: var(--c-pacientes);
-      --card-tag-bg: var(--c-pacientes-light);
-    }
-
-    /* ── COMING SOON ── */
-    .card.placeholder {
-      border-style: dashed;
-      background: transparent;
-      box-shadow: none;
-      cursor: default;
-      pointer-events: none;
-      opacity: 0.5;
-      --card-accent: transparent;
-      --card-icon-bg: var(--border);
-      --card-tag-color: var(--ink-muted);
-      --card-tag-bg: var(--border);
-    }
-
-    .card.placeholder::before { display: none; }
-    .card.placeholder:hover { transform: none; box-shadow: none; }
-
-    /* ── DEV WARNING BANNER ── */
-    .dev-warning {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #fef3c7 0%, #fff7ed 100%);
-      border: 2px solid #f59e0b;
-      border-radius: 12px;
-      padding: 10px 14px;
-      margin-top: 4px;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      color: #92400e;
-      line-height: 1.4;
-    }
-    .dev-warning-icon {
-      font-size: 20px;
-      flex-shrink: 0;
-      animation: pulse 2s infinite;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 32px;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--ink-muted);
-      border-top: 1px solid var(--border);
-    }
-
-    footer a {
-      color: var(--ink);
-      text-decoration: none;
-    }
-
-    /* ── THEME TOGGLE ── */
     /* ── SKY TOGGLE ── */
     .sky-toggle { --toggle-size: 22px; position: absolute; top: 16px; right: 16px; z-index: 10; font-size: var(--toggle-size); }
     .sky-toggle *, .sky-toggle *::before, .sky-toggle *::after { box-sizing: border-box; margin: 0; padding: 0; font-size: var(--toggle-size); }
@@ -537,56 +313,258 @@
     .sky-toggle__container:hover .sky-toggle__circle { left: calc((3.375em - 2.5em) / 2 * -1 + 0.187em); }
     .sky-toggle input:checked + .sky-toggle__container:hover .sky-toggle__circle { left: calc(100% - (3.375em - 2.5em) / 2 * -1 - 3.375em - 0.187em); }
 
-    /* ── DARK MODE OVERRIDES ── */
+    /* ── DARK HEADER ── */
     [data-theme="dark"] header {
       background: linear-gradient(135deg, #152238 0%, #1c2f4a 50%, #213656 100%);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       box-shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
 
-    [data-theme="dark"] .card h2 {
+    /* ══════════════════════════════════════════ */
+    /*  BENTO GRID                               */
+    /* ══════════════════════════════════════════ */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 32px 40px;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ── Base de celda ── */
+    .cell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      box-shadow: var(--shadow-sm);
+    }
+    .cell:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .cell h2 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
       color: var(--ink);
     }
-
-    [data-theme="dark"] .filter-btn[data-tag="todos"].active {
-      background: var(--ink-muted);
-      border-color: var(--ink-muted);
+    .cell p {
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.55;
+    }
+    .cell-stat {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .cell-stat::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
     }
 
-    [data-theme="dark"] .card.placeholder {
-      --card-icon-bg: var(--border);
-      --card-tag-color: var(--ink-muted);
-      --card-tag-bg: var(--border);
+    /* ── Hero (Plantillas COT) ── */
+    .cell-hero {
+      grid-column: 1;
+      grid-row: 1;
+      padding: 28px;
+      background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0284c7 100%);
+      color: white;
+      border: none;
+      border-radius: var(--radius-lg);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: 0 8px 32px rgba(12,74,110,0.25);
+    }
+    .cell-hero::before { display: none; }
+    .cell-hero::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -20px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    }
+    [data-theme="dark"] .cell-hero {
+      background: linear-gradient(135deg, #0c3553 0%, #0c4a6e 50%, #075985 100%);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .cell-hero h2 {
+      font-size: 1.4rem;
+      color: white;
+      position: relative;
+    }
+    .cell-hero p {
+      color: rgba(255,255,255,0.65);
+      position: relative;
+    }
+    .cell-hero .cell-stat {
+      color: rgba(255,255,255,0.45);
+      position: relative;
+    }
+    .cell-hero .cell-arrow {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition-smooth);
+    }
+    .cell-hero:hover .cell-arrow {
+      background: rgba(255,255,255,0.22);
+      transform: translateX(2px);
     }
 
-    [data-theme="dark"] .dev-warning {
-      background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(251,191,36,0.05) 100%);
-      border-color: rgba(245,158,11,0.3);
-      color: #fbbf24;
+    /* ── Medium (Analizador de Planning) ── */
+    .cell-medium {
+      grid-column: 2;
+      grid-row: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
-    [data-theme="dark"] #buscar {
-      background: var(--surface);
-      box-shadow: 5px 5px 12px rgba(0,0,0,0.35), -5px -5px 12px rgba(55,65,81,0.25);
-    }
-    [data-theme="dark"] #buscar:focus {
-      background: var(--surface);
-      box-shadow: inset 4px 4px 10px rgba(0,0,0,0.35), inset -4px -4px 10px rgba(55,65,81,0.25);
-    }
+    .cell-medium h2 { font-size: 1.2rem; margin-bottom: 4px; }
 
+    /* ── Small cards ── */
+    .small-row {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .cell-small {
+      padding: 18px 14px;
+      text-align: center;
+      border-radius: 14px;
+    }
+    .cell-small::before { display: none; }
+    .cell-small-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cell-small h2 { font-size: 0.8rem; font-weight: 400; margin: 0 0 2px; }
+    .cell-small p { font-size: 9px; }
+
+    /* ── Compact cards ── */
+    .compact-row {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .cell-compact {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-radius: 14px;
+    }
+    .cell-compact::before { display: none; }
+    .cell-compact-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cell-compact h2 { font-size: 0.82rem; font-weight: 400; margin: 0 0 1px; }
+    .cell-compact p { font-size: 9px; }
+
+    /* ══════════════════════════════════════════ */
+    /*  FOOTER                                   */
+    /* ══════════════════════════════════════════ */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    footer a { color: var(--ink); text-decoration: none; }
+
+    /* ══════════════════════════════════════════ */
+    /*  ANIMACIONES                              */
+    /* ══════════════════════════════════════════ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    header { animation: fadeInUp 0.5s ease-out; }
+    .cell-hero { animation: fadeInUp 0.5s ease-out 0.05s both; }
+    .cell-medium { animation: fadeInUp 0.5s ease-out 0.1s both; }
+    .small-row .cell:nth-child(1) { animation: fadeInUp 0.5s ease-out 0.15s both; }
+    .small-row .cell:nth-child(2) { animation: fadeInUp 0.5s ease-out 0.2s both; }
+    .small-row .cell:nth-child(3) { animation: fadeInUp 0.5s ease-out 0.25s both; }
+    .small-row .cell:nth-child(4) { animation: fadeInUp 0.5s ease-out 0.3s both; }
+    .compact-row .cell:nth-child(1) { animation: fadeInUp 0.5s ease-out 0.35s both; }
+    .compact-row .cell:nth-child(2) { animation: fadeInUp 0.5s ease-out 0.4s both; }
+
+    /* ══════════════════════════════════════════ */
+    /*  RESPONSIVE                               */
+    /* ══════════════════════════════════════════ */
     @media (max-width: 600px) {
-      header { padding: 56px 24px 36px; }
+      header { padding: 24px 20px 20px; }
+      header h1 { font-size: 1.1rem; }
+      .header-stats { gap: 14px; }
+      .header-stat-val { font-size: 1rem; }
       .hero-glow { display: none; }
-      main { padding: 40px 20px 60px; }
-      .grid { grid-template-columns: 1fr; }
-      .filters { gap: 6px; }
-      .filter-btn { font-size: 10px; padding: 6px 12px; }
       .sky-toggle { --toggle-size: 18px; top: 10px; right: 10px; }
+
+      main { padding: 12px 12px 32px; }
+      .bento { gap: 10px; }
+      .bento { grid-template-columns: 1fr; }
+      .cell-hero {
+        grid-column: 1;
+        grid-row: auto;
+        min-height: 160px;
+        padding: 22px;
+      }
+      .cell-hero h2 { font-size: 1.2rem; }
+      .cell-medium {
+        grid-column: 1;
+        grid-row: auto;
+        padding: 18px;
+      }
+      .small-row { grid-template-columns: 1fr 1fr; }
+      .compact-row { grid-template-columns: 1fr; }
     }
 
-    /* Accesibilidad — focus visible para navegacion por teclado */
+    /* ── ACCESIBILIDAD ── */
     :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-    .card:focus-visible { outline: 2px solid var(--card-accent, var(--ink)); outline-offset: 3px; }
-    input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+    .cell:focus-visible { outline: 2px solid var(--accent, var(--ink)); outline-offset: 3px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -599,11 +577,21 @@
 </head>
 <body>
   <a href="#main" class="skip-link">Saltar al contenido</a>
+
+  <!-- Mesh gradient animado de fondo -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="mesh-orb mesh-orb-1"></div>
+    <div class="mesh-orb mesh-orb-2"></div>
+    <div class="mesh-orb mesh-orb-3"></div>
+    <div class="mesh-orb mesh-orb-4"></div>
+    <div class="mesh-orb mesh-orb-5"></div>
+  </div>
+  <div class="mesh-dots" aria-hidden="true"></div>
+
   <header>
     <div class="hero-dot-grid"></div>
     <div class="hero-glow hero-glow-1"></div>
     <div class="hero-glow hero-glow-2"></div>
-    <div class="hero-glow hero-glow-3"></div>
 
     <label class="sky-toggle" title="Cambiar tema" aria-label="Cambiar modo claro/oscuro">
       <input type="checkbox" id="sky-check" />
@@ -626,251 +614,121 @@
       </div>
     </label>
 
-    <div class="header-inner">
-      <div class="header-label">Herramientas clínicas</div>
-      <h1>Herramientas<br><em>para <span class="highlight">Cirugía Ortopédica y Traumatología</span></em></h1>
-      <p>Aplicaciones web de uso clínico y administrativo para cirugía ortopédica.</p>
-      <div class="header-badge">
-        <span class="dot"></span>
-        jmacot.github.io
+    <div class="header-top">
+      <div class="header-brand">
+        <h1>Suite <span>COT</span></h1>
+        <div class="header-badge">
+          <span class="dot"></span>
+          jmacot.github.io
+        </div>
+      </div>
+    </div>
+
+    <div class="header-stats">
+      <div class="header-stat">
+        <span class="header-stat-val">60+</span>
+        <span class="header-stat-lbl">Plantillas</span>
+      </div>
+      <div class="header-stat-div"></div>
+      <div class="header-stat">
+        <span class="header-stat-val">170+</span>
+        <span class="header-stat-lbl">Consentimientos</span>
+      </div>
+      <div class="header-stat-div"></div>
+      <div class="header-stat">
+        <span class="header-stat-val">64</span>
+        <span class="header-stat-lbl">Protocolos</span>
+      </div>
+      <div class="header-stat-div"></div>
+      <div class="header-stat">
+        <span class="header-stat-val">8</span>
+        <span class="header-stat-lbl">Apps</span>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <div class="section-label">Aplicaciones disponibles</div>
+    <div class="bento">
 
-    <!-- FILTROS POR ETIQUETA -->
-    <div class="filters" role="navigation" aria-label="Filtrar herramientas">
-      <button class="filter-btn active" data-tag="todos" onclick="filtrar('todos')">Todos</button>
-      <button class="filter-btn" data-tag="quirofano" onclick="filtrar('quirofano')">Quirófano</button>
-      <button class="filter-btn" data-tag="planificacion" onclick="filtrar('planificacion')">Planificación</button>
-      <button class="filter-btn" data-tag="documentacion" onclick="filtrar('documentacion')">Documentación</button>
-      <button class="filter-btn" data-tag="pacientes" onclick="filtrar('pacientes')">Pacientes</button>
-      <button class="filter-btn" data-tag="administracion" onclick="filtrar('administracion')">Administración</button>
-    </div>
-
-    <div class="search-wrap">
-      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="search" id="buscar" placeholder="Buscar herramienta..." autocomplete="off" aria-label="Buscar herramienta" />
-    </div>
-
-    <div class="grid">
-
-      <!-- PLANTILLAS QUIRÚRGICAS -->
-      <a class="card" data-tag="quirofano" href="https://jmacot.github.io/plantillas-qx" target="_blank" style="animation-delay: 0s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-quirofano)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
+      <!-- HERO: Plantillas COT -->
+      <a class="cell cell-hero" href="https://jmacot.github.io/plantillas-qx" target="_blank">
+        <div class="cell-arrow">
+          <svg width="16" height="16" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </div>
-        <div class="card-content">
-          <div class="card-tag">Quirófano</div>
-          <h2>Plantillas COT</h2>
-          <p>Mas de 60 notas operatorias y tratamientos al alta listos para usar. Elige el procedimiento, personaliza los datos y copia el texto a la historia clinica.</p>
-        </div>
+        <h2>Plantillas COT</h2>
+        <p>Notas operatorias y tratamientos al alta. Elige el procedimiento, personaliza y copia.</p>
+        <div class="cell-stat">60+ plantillas disponibles</div>
       </a>
 
-      <!-- PROTOCOLOS REHABILITACION -->
-      <a class="card" data-tag="pacientes" href="https://jmacot.github.io/rehabilitacion-cot" target="_blank" style="animation-delay: 0.05s">
-        <div class="card-meta">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-pacientes)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-          </div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Pacientes</div>
-          <h2>Protocolos y Ejercicios</h2>
-          <p>64 protocolos de rehabilitacion por fases y semanas. 23 programas de ejercicios SERMEF en 7 regiones anatomicas. Videos integrados.</p>
-        </div>
+      <!-- MEDIUM: Analizador de Planning -->
+      <a class="cell cell-medium" href="https://jmacot.github.io/planning-cot" target="_blank" style="--accent: var(--c-administracion)">
+        <h2>Analizador de Planning</h2>
+        <p>Visualiza el planning mensual del servicio. Compara guardias entre compañeros y revisa la retribución estimada.</p>
+        <div class="cell-stat" style="color: var(--c-administracion);">Calendario y gráficas D3</div>
       </a>
 
-      <!-- KNEE ALIGN -->
-      <a class="card" data-tag="planificacion" href="https://jmacot.github.io/knee-align" target="_blank" style="animation-delay: 0.1s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-planificacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      <!-- SMALL ROW -->
+      <div class="small-row">
+        <a class="cell cell-small" href="https://jmacot.github.io/rehabilitacion-cot" target="_blank" style="--accent: var(--c-pacientes)">
+          <div class="cell-small-icon" style="background: var(--c-pacientes-light);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-pacientes)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
           </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Planificación</div>
+          <h2>Rehabilitación</h2>
+          <p>64 protocolos</p>
+        </a>
+        <a class="cell cell-small" href="https://jmacot.github.io/knee-align" target="_blank" style="--accent: var(--c-planificacion)">
+          <div class="cell-small-icon" style="background: var(--c-planificacion-light);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-planificacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
           <h2>Knee Align</h2>
-          <p>Análisis AKUMA/AKULA de alineación coronal de rodilla. Clasificación CPAK, árbol de decisión osteotomía vs UKA, planificación de corrección Mikulicz y exportación PDF.</p>
-        </div>
-      </a>
-
-      <!-- PLANNING COT -->
-      <a class="card" data-tag="administracion" href="https://jmacot.github.io/planning-cot" target="_blank" style="animation-delay: 0.15s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-administracion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16V12"/><path d="M12 16V8"/><path d="M16 16v-2"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <p>AKUMA / AKULA</p>
+        </a>
+        <a class="cell cell-small" href="https://jmacot.github.io/CPAK" target="_blank" style="--accent: var(--c-planificacion)">
+          <div class="cell-small-icon" style="background: var(--c-planificacion-light);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-planificacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Administración</div>
-          <h2>Analizador de Planning</h2>
-          <p>Visualiza el planning mensual del servicio. Consulta tu calendario, compara la carga de guardias entre compañeros y revisa la retribucion estimada.</p>
-        </div>
-      </a>
-
-      <!-- MATERIAL EXTERNO -->
-      <a class="card" data-tag="documentacion" href="https://jmacot.github.io/Material-Externo" target="_blank" style="animation-delay: 0.2s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-documentacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Documentación</div>
-          <h2>Solicitud de Material Externo</h2>
-          <p>Solicita material quirurgico externo en segundos. Elige casa comercial, selecciona el material del catalogo y genera el documento listo para enviar.</p>
-        </div>
-      </a>
-
-      <!-- CALCULADORA GUARDIAS -->
-      <a class="card" data-tag="administracion" href="https://jmacot.github.io/calculadora-guardias" target="_blank" style="animation-delay: 0.25s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-administracion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Administración</div>
-          <h2>Calculadora de Guardias</h2>
-          <p>Calcula lo que vas a cobrar por tus guardias. Selecciona los dias en el calendario y consulta el bruto, neto e IRPF para cada centro hospitalario.</p>
-        </div>
-      </a>
-
-      <!-- CONSENTIMIENTOS INFORMADOS -->
-      <a class="card" data-tag="documentacion" href="https://jmacot.github.io/consentimientos" target="_blank" style="animation-delay: 0.3s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-documentacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Documentación</div>
-          <h2>Consentimientos Informados</h2>
-          <p>Accede a mas de 170 consentimientos informados de SECOT y SAS. Busca por patologia o navega por categorias para encontrar el documento que necesitas.</p>
-        </div>
-      </a>
-
-      <!-- CPAK PLANNER -->
-      <a class="card" data-tag="planificacion" href="https://jmacot.github.io/CPAK" target="_blank" style="animation-delay: 0.35s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-planificacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <div class="card-arrow">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">Planificación</div>
           <h2>CPAK Planner</h2>
-          <p>Planifica la alineacion coronal en protesis total de rodilla. Introduce las medidas radiologicas y obtén la clasificacion CPAK con el fenotipo del paciente.</p>
-        </div>
-      </a>
+          <p>Fenotipo CPAK</p>
+        </a>
+        <a class="cell cell-small" href="https://jmacot.github.io/calculadora-guardias" target="_blank" style="--accent: var(--c-administracion)">
+          <div class="cell-small-icon" style="background: var(--c-administracion-light);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-administracion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>
+          </div>
+          <h2>Calc. Guardias</h2>
+          <p>Bruto, neto, IRPF</p>
+        </a>
+      </div>
 
-      <!-- PLACEHOLDER -->
-      <div class="card placeholder" data-tag="none" style="animation-delay: 0.45s">
-        <div class="card-meta">
-          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="card-content">
-          <div class="card-tag">En proceso</div>
-          <h2>Próximamente</h2>
-          <p>Nueva herramienta en desarrollo.</p>
-        </div>
+      <!-- COMPACT ROW -->
+      <div class="compact-row">
+        <a class="cell cell-compact" href="https://jmacot.github.io/Material-Externo" target="_blank" style="--accent: var(--c-documentacion)">
+          <div class="cell-compact-icon" style="background: var(--c-documentacion-light);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-documentacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <h2>Material Externo</h2>
+            <p>Solicitudes de material quirúrgico</p>
+          </div>
+        </a>
+        <a class="cell cell-compact" href="https://jmacot.github.io/consentimientos" target="_blank" style="--accent: var(--c-documentacion)">
+          <div class="cell-compact-icon" style="background: var(--c-documentacion-light);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-documentacion)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div>
+            <h2>Consentimientos Informados</h2>
+            <p>170+ consentimientos SECOT y SAS</p>
+          </div>
+        </a>
       </div>
 
     </div>
   </main>
 
   <footer>
-    <a href="https://github.com/jmacot" target="_blank">github.com/jmacot</a> · Herramientas de uso clínico
+    <a href="https://github.com/jmacot" target="_blank">github.com/jmacot</a> · Herramientas de uso clínico · 2024–2026
   </footer>
 
   <script>
-    // ─────────────────────────────────────────────
-    //  FILTROS
-    // ─────────────────────────────────────────────
-    const allCards = document.querySelectorAll('.card:not(.placeholder)');
-
-    let filterTimer;
-    function filtrar(tag) {
-      clearTimeout(filterTimer);
-      document.getElementById('buscar').value = '';
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tag === tag);
-      });
-      const cards = document.querySelectorAll('.card');
-      // Fade out cards that will hide
-      cards.forEach(card => {
-        const cardTag = card.dataset.tag;
-        const shouldShow = tag === 'todos' || cardTag === tag || cardTag === 'none';
-        if (!shouldShow && !card.classList.contains('hidden')) {
-          card.classList.add('fading-out');
-        }
-      });
-      // After fade out, toggle display and fade in new ones
-      filterTimer = setTimeout(() => {
-        cards.forEach(card => {
-          const cardTag = card.dataset.tag;
-          const shouldShow = tag === 'todos' || cardTag === tag || cardTag === 'none';
-          card.classList.remove('fading-out');
-          if (shouldShow) {
-            card.classList.remove('hidden');
-            card.classList.add('fading-in');
-            requestAnimationFrame(() => requestAnimationFrame(() => {
-              card.classList.remove('fading-in');
-            }));
-          } else {
-            card.classList.add('hidden');
-          }
-        });
-      }, 200);
-    }
-
-    // Inject count badges
-    (function initCounts() {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        const tag = btn.dataset.tag;
-        const count = tag === 'todos'
-          ? allCards.length
-          : document.querySelectorAll(`.card[data-tag="${tag}"]:not(.placeholder)`).length;
-        btn.insertAdjacentHTML('beforeend', ` <span class="filter-count">${count}</span>`);
-      });
-    })();
-
-    // ─────────────────────────────────────────────
-    //  BUSQUEDA
-    // ─────────────────────────────────────────────
-    function normalizar(str) {
-      return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
-
-    const inputBuscar = document.getElementById('buscar');
-    inputBuscar.addEventListener('input', () => {
-      const q = normalizar(inputBuscar.value.trim());
-      const activeTag = document.querySelector('.filter-btn.active')?.dataset.tag || 'todos';
-      document.querySelectorAll('.card').forEach(card => {
-        if (card.classList.contains('placeholder')) return;
-        const title = normalizar(card.querySelector('h2')?.textContent || '');
-        const desc = normalizar(card.querySelector('p')?.textContent || '');
-        const matchSearch = !q || title.includes(q) || desc.includes(q);
-        const matchTag = activeTag === 'todos' || card.dataset.tag === activeTag;
-        card.classList.toggle('hidden', !(matchSearch && matchTag));
-      });
-    });
-
     // ─────────────────────────────────────────────
     //  DARK MODE
     // ─────────────────────────────────────────────
@@ -924,7 +782,17 @@
     });
 
     initTheme();
-  </script>
 
+    // ─────────────────────────────────────────────
+    //  LOCALHOST — desactivar enlaces externos
+    // ─────────────────────────────────────────────
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      document.querySelectorAll('a[href^="https://jmacot.github.io"]').forEach(a => {
+        a.removeAttribute('href');
+        a.style.opacity = '0.4';
+        a.style.pointerEvents = 'none';
+      });
+    }
+  </script>
 </body>
 </html>
