@@ -245,8 +245,12 @@
 </head>
 <body>
   <header>
+    <!-- Sky toggle (ver seccion 8 para CSS completo) -->
+    <label class="sky-toggle" title="Cambiar tema" aria-label="Cambiar modo claro/oscuro">
+      <input type="checkbox" id="sky-check" />
+      <div class="sky-toggle__container"><!-- ... --></div>
+    </label>
     <a class="back-home" href="https://jmacot.github.io/" title="Volver al inicio">← Inicio</a>
-    <button class="theme-toggle" id="btn-theme" aria-label="Cambiar a modo oscuro" title="Cambiar tema"></button>
     <div class="header-label">{SECCION}</div>
     <h1>{TITULO}<br><em>{SUBTITULO}</em></h1>
     <p>{DESCRIPCION}</p>
@@ -258,12 +262,23 @@
     <a href="https://github.com/jmacot" target="_blank">github.com/jmacot</a> · {ETIQUETA}
   </footer>
   <script>
-    // JavaScript
-    // — Theme toggle (Sistema A: #0f172a light, #152238 dark) —
-    // applyTheme() debe incluir:
-    //   var metaTheme = document.getElementById('meta-theme');
-    //   btnTheme.setAttribute('aria-label', dark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
-    //   if (metaTheme) metaTheme.setAttribute('content', dark ? '#152238' : '#0f172a');
+    // ─────────────────────────────────────────────
+    //  THEME
+    // ─────────────────────────────────────────────
+    const skyCheck = document.getElementById('sky-check');
+    function applyTheme(dark) {
+      var metaTheme = document.getElementById('meta-theme');
+      if (dark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        skyCheck.checked = true;
+        if (metaTheme) metaTheme.setAttribute('content', '#152238');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        skyCheck.checked = false;
+        if (metaTheme) metaTheme.setAttribute('content', '#0f172a');
+      }
+    }
+    // ... initTheme(), getAutoTheme(), event listeners (same pattern as Sistema B)
   </script>
 </body>
 </html>
@@ -372,7 +387,13 @@
 <div class="app-container">
   <a class="back-home" href="https://jmacot.github.io/" title="Volver al inicio">← Inicio</a>
   <div class="app-header">
-    <button class="theme-toggle" id="btn-theme" aria-label="Cambiar a modo oscuro" title="Cambiar tema"></button>
+    <div class="hero-dot-grid"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <label class="sky-toggle" title="Cambiar tema" aria-label="Cambiar modo claro/oscuro">
+      <input type="checkbox" id="sky-check" />
+      <div class="sky-toggle__container"><!-- ... --></div>
+    </label>
     <h1>{TITULO}</h1>
     <p>{DESCRIPCION}</p>
   </div>
@@ -836,8 +857,8 @@ const fmt = n => n.toLocaleString('es-ES', {
 
   /* B Premium: header y pills */
   .app-header { padding: 32px 20px 24px; border-radius: var(--radius); }
-  .app-header::before, .app-header::after { display: none; } /* ocultar glows */
-  .theme-toggle { width: 36px; height: 36px; font-size: 1.1rem; }
+  .hero-glow { display: none; }
+  .sky-toggle { --toggle-size: 16px; top: 8px; right: 8px; }
   .cat-pills { gap: 6px; } /* scroll horizontal natural */
 }
 ```
@@ -877,42 +898,48 @@ font-size: clamp(1.3rem, 3vw, 1.7rem); /* Sistema B h1 */
 }
 ```
 
-### HTML — boton toggle
+### HTML — Sky Toggle (reemplaza el antiguo boton emoji)
+
+> **Regla:** Todos los repos usan el sky toggle CSS puro desde abril 2026. NO usar el antiguo `<button class="theme-toggle" id="btn-theme">` con emojis.
 
 ```html
-<button class="theme-toggle" id="btn-theme" aria-label="Cambiar a modo oscuro" title="Cambiar tema"></button>
+<label class="sky-toggle" title="Cambiar tema" aria-label="Cambiar modo claro/oscuro">
+  <input type="checkbox" id="sky-check" />
+  <div class="sky-toggle__container">
+    <div class="sky-toggle__clouds"></div>
+    <div class="sky-toggle__stars"><!-- SVG estrellas --></div>
+    <div class="sky-toggle__circle">
+      <div class="sky-toggle__sun-moon">
+        <div class="sky-toggle__moon">
+          <div class="sky-toggle__spot"></div>
+          <div class="sky-toggle__spot"></div>
+          <div class="sky-toggle__spot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</label>
 ```
 
-```css
-.theme-toggle {
-  position: absolute; top: 0.3rem; right: 0.3rem;
-  background: var(--surface2); border: 1.5px solid var(--border);
-  border-radius: 50%; width: 42px; height: 42px; font-size: 1.3rem;
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  box-shadow: var(--shadow); transition: border-color 0.2s, box-shadow 0.2s;
-}
-.theme-toggle:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
-```
+- **Posicion:** `position: absolute; top: 12px; right: 12px;` (Sistema B) o `top: 16px; right: 16px;` (Sistema A)
+- **Tamano:** `--toggle-size: 20px` (desktop), `16px` (movil)
+- **Checked = dark mode** — el checkbox controla `[data-theme="dark"]`
 
-### JS — auto-deteccion + toggle manual
+### JS — auto-deteccion + sky toggle
 
 ```javascript
-const btnTheme = document.getElementById('btn-theme');
+const skyCheck = document.getElementById('sky-check');
 
 function applyTheme(dark) {
   var metaTheme = document.getElementById('meta-theme');
   if (dark) {
     document.documentElement.setAttribute('data-theme', 'dark');
-    btnTheme.textContent = '☀️';
-    btnTheme.setAttribute('aria-label', 'Cambiar a modo claro');
-    // Sistema B: '#0a1628' | Sistema A: '#152238'
-    if (metaTheme) metaTheme.setAttribute('content', '#0a1628');
+    skyCheck.checked = true;
+    if (metaTheme) metaTheme.setAttribute('content', '#152238');
   } else {
     document.documentElement.removeAttribute('data-theme');
-    btnTheme.textContent = '🌙';
-    btnTheme.setAttribute('aria-label', 'Cambiar a modo oscuro');
-    // Sistema B: '#1a3a5c' | Sistema A: '#0f172a'
-    if (metaTheme) metaTheme.setAttribute('content', '#1a3a5c');
+    skyCheck.checked = false;
+    if (metaTheme) metaTheme.setAttribute('content', '#1a3a5c'); // Sistema B; Sistema A: '#0f172a'
   }
 }
 
@@ -935,10 +962,10 @@ function initTheme() {
   }
 }
 
-btnTheme.addEventListener('click', () => {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  applyTheme(!isDark);
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+skyCheck.addEventListener('change', function() {
+  var isDark = skyCheck.checked;
+  applyTheme(isDark);
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
   localStorage.setItem('theme-date', new Date().toDateString());
 });
 
