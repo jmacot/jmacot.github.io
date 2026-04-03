@@ -251,16 +251,18 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       color: var(--ink);
-      background: var(--surface);
-      border: 1.5px solid var(--border);
+      background: var(--bg);
+      border: none;
       border-radius: 999px;
       outline: none;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 5px 5px 12px #ccd1db,
+                  -5px -5px 12px #edf2f8;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #buscar:focus {
-      border-color: var(--ink-muted);
-      box-shadow: 0 0 0 3px rgb(15 23 42 / 0.06);
+      background: var(--bg);
+      box-shadow: inset 4px 4px 10px #ccd1db,
+                  inset -4px -4px 10px #edf2f8;
     }
     #buscar::placeholder { color: var(--ink-muted); opacity: 0.6; }
 
@@ -561,6 +563,14 @@
       background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(251,191,36,0.05) 100%);
       border-color: rgba(245,158,11,0.3);
       color: #fbbf24;
+    }
+    [data-theme="dark"] #buscar {
+      background: var(--surface);
+      box-shadow: 5px 5px 12px rgba(0,0,0,0.35), -5px -5px 12px rgba(55,65,81,0.25);
+    }
+    [data-theme="dark"] #buscar:focus {
+      background: var(--surface);
+      box-shadow: inset 4px 4px 10px rgba(0,0,0,0.35), inset -4px -4px 10px rgba(55,65,81,0.25);
     }
 
     @media (max-width: 600px) {
