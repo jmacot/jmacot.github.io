@@ -21,7 +21,7 @@
 | Plantillas Quirurgicas | plantillas-qx | B Premium | quirofano |
 | CPAK Planner | CPAK | B | planificacion |
 | Consentimientos Informados | consentimientos | A | documentacion |
-| Landing Page (hub) | jmacot.github.io | A | — |
+| Landing Page (hub) | jmacot.github.io | A (Bento) | — |
 
 ### Cuando usar cada sistema
 
@@ -729,6 +729,65 @@
 .panels-grid { animation: fadeInUp 0.6s ease-out 0.2s both; }
 .panel textarea.flash { animation: textFlash 0.4s ease-out; }
 ```
+
+### Landing Page — Bento Grid (jmacot.github.io)
+
+> **Desde abril 2026**, la landing page usa un layout Bento Grid en vez de grid plana. Sin filtros ni busqueda.
+
+**Estructura del grid:**
+
+| Tier | Cards | CSS Grid | Contenido |
+|------|-------|----------|-----------|
+| Hero | Plantillas COT | `grid-column: 1; grid-row: 1` | Gradiente azul, titulo, descripcion, stat, flecha CTA |
+| Medium | Analizador de Planning | `grid-column: 2; grid-row: 1` | Surface bg, titulo, descripcion, stat |
+| Small (x4) | Rehabilitacion, Knee Align, CPAK, Calc. Guardias | `grid-column: 1 / -1` → 4 col | Icono centrado + titulo + descripcion corta |
+| Compact (x2) | Material Externo, Consentimientos | `grid-column: 1 / -1` → 2 col | Icono izquierda + titulo/descripcion derecha |
+
+**Reglas:**
+- Sin etiquetas de categoria en las cards
+- Flecha CTA solo en la hero card
+- Sin filtros, sin busqueda, sin placeholder card
+- Header compacto: "Suite COT" (gradiente) + badge + stats inline (60+ / 170+ / 64 / 8)
+- Responsive movil: bento pasa a 1 columna, small-row a 2 col, compact-row a 1 col
+
+**Anadir nueva app:**
+- Uso bajo → small card (la fila pasa a 5 col, o nueva fila)
+- Uso alto → compact o medium tier
+- A partir de 12+ apps → reintroducir busqueda
+
+### Mesh Gradient animado (fondo de la landing)
+
+> Fondo decorativo con 5 orbs de color animados + dot grid sutil. CSS puro, cero dependencias.
+
+```html
+<div class="mesh-bg" aria-hidden="true">
+  <div class="mesh-orb mesh-orb-1"></div>
+  <div class="mesh-orb mesh-orb-2"></div>
+  <div class="mesh-orb mesh-orb-3"></div>
+  <div class="mesh-orb mesh-orb-4"></div>
+  <div class="mesh-orb mesh-orb-5"></div>
+</div>
+<div class="mesh-dots" aria-hidden="true"></div>
+```
+
+**Colores de los orbs** — usan los colores del sistema por categoria:
+
+| Orb | Color | Opacidad light | Opacidad dark |
+|-----|-------|---------------|--------------|
+| 1 | `rgba(14,165,233)` cyan/quirofano | 0.25 | 0.12 |
+| 2 | `rgba(139,92,246)` violet/admin | 0.20 | 0.10 |
+| 3 | `rgba(13,148,136)` teal/planif. | 0.18 | 0.08 |
+| 4 | `rgba(236,72,153)` pink/pacientes | 0.12 | 0.06 |
+| 5 | `rgba(245,158,11)` amber/docs | 0.12 | 0.06 |
+
+**Reglas:**
+- Orbs con `filter: blur(80px)` y `will-change: transform`
+- Animaciones de 18-24s con trayectorias distintas (`translate` + `scale`)
+- Dot grid encima: `radial-gradient` 0.5px dots, 32px spacing, 6% opacidad (3% dark)
+- `.mesh-bg` tiene `background: var(--bg)` como base
+- `aria-hidden="true"` en ambos contenedores
+- Desactivado por `@media (prefers-reduced-motion: reduce)`
+- Reutilizable en otros repos que necesiten fondo decorativo
 
 ---
 
