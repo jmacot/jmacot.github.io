@@ -458,33 +458,11 @@
     }
     .cell-medium h2 { font-size: 1.2rem; margin-bottom: 4px; }
 
-    /* ── Featured row (full-width highlight) ── */
-    .featured-row {
-      grid-column: 1 / -1;
-    }
-    .cell-featured {
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: linear-gradient(135deg, var(--surface) 0%, var(--surface) 100%);
-      border-left: 4px solid var(--accent, var(--c-quirofano));
-    }
-    .cell-featured h2 { font-size: 1.1rem; margin-bottom: 2px; }
-    .cell-featured p { font-size: 0.82rem; }
-    .cell-featured .cell-stat { margin-top: 4px; }
-    .cell-featured .feat-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .featured-row { animation: fadeInUp 0.5s ease-out 0.12s both; }
-
     /* ── Small cards ── */
     .small-row {
       grid-column: 1 / -1;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 10px;
     }
     .cell-small {
@@ -693,22 +671,15 @@
         <div class="cell-stat" style="color: var(--c-administracion);">Calendario y gráficas D3</div>
       </a>
 
-      <!-- FEATURED: Infecciones COT -->
-      <div class="featured-row">
-        <a class="cell cell-featured" href="https://jmacot.github.io/Infecciones" target="_blank" style="--accent: var(--c-quirofano)">
-          <div class="feat-icon" style="background: var(--c-quirofano-light);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-quirofano)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v5m0 8v5m-9-9h5m8 0h5"/><path d="M5.6 5.6l3.6 3.6m5.6 5.6l3.6 3.6M5.6 18.4l3.6-3.6m5.6-5.6l3.6-3.6"/></svg>
-          </div>
-          <div>
-            <h2>Infecciones COT</h2>
-            <p>Guía de antibioterapia musculoesquelética. Tratamiento empírico y dirigido, profilaxis y espectro antibacteriano.</p>
-            <div class="cell-stat" style="color: var(--c-quirofano);">ICM 2025 · 18 microorganismos · 42 antibióticos</div>
-          </div>
-        </a>
-      </div>
-
       <!-- SMALL ROW -->
       <div class="small-row">
+        <a class="cell cell-small" href="https://jmacot.github.io/Infecciones" target="_blank" style="--accent: var(--c-quirofano)">
+          <div class="cell-small-icon" style="background: var(--c-quirofano-light);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-quirofano)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v5m0 8v5m-9-9h5m8 0h5"/><path d="M5.6 5.6l3.6 3.6m5.6 5.6l3.6 3.6M5.6 18.4l3.6-3.6m5.6-5.6l3.6-3.6"/></svg>
+          </div>
+          <h2>Infecciones</h2>
+          <p>Antibioterapia MSK</p>
+        </a>
         <a class="cell cell-small" href="https://jmacot.github.io/rehabilitacion-cot" target="_blank" style="--accent: var(--c-pacientes)">
           <div class="cell-small-icon" style="background: var(--c-pacientes-light);">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-pacientes)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
