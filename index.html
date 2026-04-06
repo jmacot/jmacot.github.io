@@ -458,6 +458,28 @@
     }
     .cell-medium h2 { font-size: 1.2rem; margin-bottom: 4px; }
 
+    /* ── Featured row (full-width highlight) ── */
+    .featured-row {
+      grid-column: 1 / -1;
+    }
+    .cell-featured {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface) 100%);
+      border-left: 4px solid var(--accent, var(--c-quirofano));
+    }
+    .cell-featured h2 { font-size: 1.1rem; margin-bottom: 2px; }
+    .cell-featured p { font-size: 0.82rem; }
+    .cell-featured .cell-stat { margin-top: 4px; }
+    .cell-featured .feat-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .featured-row { animation: fadeInUp 0.5s ease-out 0.12s both; }
+
     /* ── Small cards ── */
     .small-row {
       grid-column: 1 / -1;
@@ -645,7 +667,7 @@
       </div>
       <div class="header-stat-div"></div>
       <div class="header-stat">
-        <span class="header-stat-val">8</span>
+        <span class="header-stat-val">9</span>
         <span class="header-stat-lbl">Apps</span>
       </div>
     </div>
@@ -664,19 +686,26 @@
         <div class="cell-stat">60+ plantillas disponibles</div>
       </a>
 
-      <!-- MEDIUM: Infecciones COT -->
-      <a class="cell cell-medium" href="https://jmacot.github.io/Infecciones" target="_blank" style="--accent: var(--c-quirofano)">
-        <h2>Infecciones COT</h2>
-        <p>Guía de antibioterapia musculoesquelética. Tratamiento empírico y dirigido por microorganismo, profilaxis y espectro antibacteriano.</p>
-        <div class="cell-stat" style="color: var(--c-quirofano);">ICM 2025 · 18 microorganismos</div>
-      </a>
-
       <!-- MEDIUM: Analizador de Planning -->
       <a class="cell cell-medium" href="https://jmacot.github.io/planning-cot" target="_blank" style="--accent: var(--c-administracion)">
         <h2>Analizador de Planning</h2>
         <p>Visualiza el planning mensual del servicio. Compara guardias entre compañeros y revisa la retribución estimada.</p>
         <div class="cell-stat" style="color: var(--c-administracion);">Calendario y gráficas D3</div>
       </a>
+
+      <!-- FEATURED: Infecciones COT -->
+      <div class="featured-row">
+        <a class="cell cell-featured" href="https://jmacot.github.io/Infecciones" target="_blank" style="--accent: var(--c-quirofano)">
+          <div class="feat-icon" style="background: var(--c-quirofano-light);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-quirofano)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v5m0 8v5m-9-9h5m8 0h5"/><path d="M5.6 5.6l3.6 3.6m5.6 5.6l3.6 3.6M5.6 18.4l3.6-3.6m5.6-5.6l3.6-3.6"/></svg>
+          </div>
+          <div>
+            <h2>Infecciones COT</h2>
+            <p>Guía de antibioterapia musculoesquelética. Tratamiento empírico y dirigido, profilaxis y espectro antibacteriano.</p>
+            <div class="cell-stat" style="color: var(--c-quirofano);">ICM 2025 · 18 microorganismos · 42 antibióticos</div>
+          </div>
+        </a>
+      </div>
 
       <!-- SMALL ROW -->
       <div class="small-row">
