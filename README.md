@@ -31,7 +31,7 @@
 |-----|-------------|--------|
 | **Knee Align** | Análisis de alineación coronal de rodilla con algoritmos AKUMA/AKULA. Diagnóstico diferencial, planificación de corrección y exportación PDF del informe preoperatorio. | [Abrir app](https://jmacot.github.io/knee-align) \| [Repo](https://github.com/jmacot/knee-align) |
 | **CPAK Planner** | Planifica la alineación coronal en prótesis total de rodilla. Introduce las medidas radiológicas y obtén la clasificación CPAK con el fenotipo del paciente. | [Abrir app](https://jmacot.github.io/CPAK) \| [Repo](https://github.com/jmacot/CPAK) |
-| **Analizador de Planning** | Visualiza el planning mensual del servicio. Consulta tu calendario, compara la carga de guardias entre compañeros y revisa la retribución estimada. | [Abrir app](https://jmacot.github.io/planning-cot) \| [Repo](https://github.com/jmacot/planning-cot) |
+| **Analizador de Planning** | Analiza tu actividad mensual: turnos, quirófanos, consultas y guardias en una sola vista, con gráficas y retribución estimada. | [Abrir app](https://jmacot.github.io/planning-cot) \| [Repo](https://github.com/jmacot/planning-cot) |
 
 ### 📝 Documentación
 
