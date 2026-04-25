@@ -568,6 +568,23 @@
       .compact-row { grid-template-columns: 1fr; }
     }
 
+    /* ══════════════════════════════════════════ */
+    /*  PERF MÓVIL — desactiva efectos pesados   */
+    /* ══════════════════════════════════════════ */
+    /* En móvil/tablet los 5 orbs animados con filter:blur(80px) infinito y
+       el dot-grid en background-image dejan la GPU saturada y retrasan la
+       aparición de las cards. El animation-delay escalonado (hasta 0.45 s)
+       además bloquea el primer paint visual de las últimas cards. Aquí los
+       dejamos fuera por completo en pantallas de hasta tablet.            */
+    @media (max-width: 768px) {
+      .mesh-bg, .mesh-dots, .hero-dot-grid { display: none; }
+      header,
+      .cell-hero, .cell-medium,
+      .small-row .cell, .compact-row .cell {
+        animation: none !important;
+      }
+    }
+
     /* ── ACCESIBILIDAD ── */
     :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
     .cell:focus-visible { outline: 2px solid var(--accent, var(--ink)); outline-offset: 3px; }
