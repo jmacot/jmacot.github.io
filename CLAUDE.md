@@ -33,6 +33,51 @@ App single-file (`index.html`). CSS en `<style>`, JS en `<script>`, sin build to
 - **Sin autenticación propia**: las herramientas gestionan su propio auth vía `cot_auth` en localStorage
 - **Stub localhost**: desactiva links de navegación externa en desarrollo local
 
+## Login (StatiCrypt)
+
+`password_template.html` se inyecta en el flujo de cifrado StatiCrypt vía
+`.github/workflows/staticrypt-deploy.yml`. Diseño actual: **efecto "lamp"
+sky→violet** sobre `#020617` (paleta fija oscura, coincide con accent line
+del Sistema B y blobs cyan/violet del mesh de la landing → continuidad
+visual al decryptar). Inspirado en Aceternity UI Lamp, adaptado a CSS puro
+con `conic-gradient` + máscaras (sin framer-motion).
+
+- **`password_preview.html`** es un mirror manual del template con stub
+  que salta StatiCrypt (contraseña test `demo`). Hay que mantenerlo
+  sincronizado al editar el template — script de regeneración en histórico
+  de Bash, pero a mano sirve.
+- **Placeholders StatiCrypt**: `/*[|template_title|]*/0`,
+  `template_instructions`, `template_error`, `template_placeholder`,
+  `template_toggle_show/hide`, `template_remember`, `template_button`,
+  `js_staticrypt`, `is_remember_enabled`, `staticrypt_config`. NO renombrar
+  ni borrar — los reemplaza StatiCrypt al cifrar.
+- **IDs requeridos por el motor StatiCrypt**: `staticrypt_loading`,
+  `staticrypt_content`, `staticrypt-form`, `staticrypt-password`,
+  `staticrypt-remember`, `staticrypt-remember-label`, `error-msg`,
+  `toggle-btn`, `icon-eye`, `icon-eye-off`.
+- **No tiene dark/light toggle** — el efecto lamp solo funciona sobre
+  fondo oscuro. Auto-theme JS eliminado del template.
+
+### Animaciones diferidas (regla iOS Safari)
+
+`#staticrypt_content` arranca con `class="hidden"` (display:none) y
+StatiCrypt tarda varios cientos de ms en intentar auto-decrypt. Si las
+animaciones se aplican directamente a los elementos, **iOS Safari las
+consume durante ese periodo** y al hacerse visible el form aparece sin
+transición.
+
+Patrón obligatorio: animaciones bajo selector `body.animate .lamp-*`, y en
+JS, justo tras `classList.remove("hidden")`:
+
+```js
+requestAnimationFrame(function() {
+  document.body.classList.add('animate');
+});
+```
+
+Aplica también al preview (en su DOMContentLoaded). Casos pasados de
+"animación no se ve en móvil" siempre han sido este patrón.
+
 ## Desarrollo
 
 ```bash
