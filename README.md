@@ -99,7 +99,8 @@ open plantillas-qx/index.html
 ```
 jmacot.github.io/          ← este repo (portal principal)
 ├── index.html              ← landing page con filtros por categoría
-├── password_template.html  ← plantilla de login StatiCrypt
+├── password_template.html  ← plantilla de login StatiCrypt (lamp sky→violet)
+├── password_preview.html   ← preview del login sin StatiCrypt (dev)
 ├── .github/workflows/      ← workflow de encriptación y despliegue
 ├── LICENSE
 ├── .gitignore
