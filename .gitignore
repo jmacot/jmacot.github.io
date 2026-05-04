@@ -12,4 +12,7 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Local tooling / agents
 .claude/
+.superpowers/

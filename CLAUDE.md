@@ -42,10 +42,11 @@ del Sistema B y blobs cyan/violet del mesh de la landing → continuidad
 visual al decryptar). Inspirado en Aceternity UI Lamp, adaptado a CSS puro
 con `conic-gradient` + máscaras (sin framer-motion).
 
-- **`password_preview.html`** es un mirror manual del template con stub
-  que salta StatiCrypt (contraseña test `demo`). Hay que mantenerlo
-  sincronizado al editar el template — script de regeneración en histórico
-  de Bash, pero a mano sirve.
+- **`password_preview.html`** es un mirror del template con stub que salta
+  StatiCrypt (contraseña test `demo`). Se **regenera automáticamente** desde
+  el template con `python3 tools/build-preview.py`. Tras editar
+  `password_template.html`, ejecutar siempre el script (o
+  `--check` para verificar sincronía sin escribir).
 - **Placeholders StatiCrypt**: `/*[|template_title|]*/0`,
   `template_instructions`, `template_error`, `template_placeholder`,
   `template_toggle_show/hide`, `template_remember`, `template_button`,
