@@ -2,6 +2,8 @@
 
 Este archivo orienta a Claude Code (claude.ai/code) para trabajar con este repositorio.
 
+> **OBSOLETO (desde 2026-05):** este repo ya **no es el hub con login StatiCrypt**. Su `index.html` solo hace `<meta http-equiv="refresh">` a **`https://app.jmacot.com`**. Las herramientas viven ahora **gateadas (login Supabase) en `jmacot-app`** y servidas por Cloudflare Pages. **Todo lo descrito abajo (galería de cards, StatiCrypt, deploy GitHub Pages) es histórico.** Para trabajar en las tools, ir a `COT/jmacot-app/tools/<slug>/`. Ver `COT/CLAUDE.md` y `COT/jmacot-app/CLAUDE.md`.
+
 ## Proyecto
 
 Landing page / hub central del ecosistema COT. Muestra una galería de herramientas clínicas organizadas por categoría (quirófano, administración, documentación, planificación). Cada card enlaza a una herramienta alojada en GitHub Pages.
