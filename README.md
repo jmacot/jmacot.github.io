@@ -1,135 +1,50 @@
 <div align="center">
 
-# 🏥 Herramientas de Cirugía Ortopédica y Traumatología
+# 🏥 Herramientas COT — redirección
 
-**Portal web con herramientas clínicas y administrativas para el día a día en COT**
+**Este dominio ya no aloja las herramientas clínicas: solo redirige a la app.**
 
-[![Sitio web](https://img.shields.io/badge/web-jmacot.github.io-1a3a5c?style=for-the-badge&logo=github&logoColor=white)](https://jmacot.github.io)
-[![Aplicaciones](https://img.shields.io/badge/apps-11-16a34a?style=for-the-badge)]()
+[![Destino](https://img.shields.io/badge/ir_a-app.jmacot.com-38bdf8?style=for-the-badge&logo=cloudflare&logoColor=white)](https://app.jmacot.com)
 [![Licencia](https://img.shields.io/badge/licencia-All_Rights_Reserved-red?style=for-the-badge)]()
-
----
-
-*Aplicaciones web estáticas, sin instalación, sin dependencias —*
-*se abren en cualquier navegador.*
 
 </div>
 
 ---
 
-## Aplicaciones
+## Qué es este repo hoy
 
-### 📋 Quirófano
+Una única página que dice «nos hemos mudado» y lleva a **[app.jmacot.com](https://app.jmacot.com)**, con `<meta refresh>` a los 4 segundos y un botón por si el navegador no redirige solo.
 
-| App | Descripción | Enlace |
-|-----|-------------|--------|
-| **Plantillas Quirúrgicas COT** | Más de 87 notas operatorias y tratamientos al alta listos para usar. Elige el procedimiento, personaliza los datos y copia el texto a la historia clínica. | [Abrir app](https://jmacot.github.io/plantillas-qx) \| [Repo](https://github.com/jmacot/plantillas-qx) |
+Desde **mayo de 2026** las herramientas clínicas se sirven desde una app privada en Cloudflare Pages, detrás de login y con aprobación manual de cada cuenta. Antes de eso, este portal las listaba y las protegía con una contraseña compartida (StatiCrypt); ese modelo se retiró: la contraseña única no distinguía entre usuarios y no permitía revocar accesos.
 
-### 🦴 Planificación
-
-| App | Descripción | Enlace |
-|-----|-------------|--------|
-| **Knee Align** | Análisis de alineación coronal de rodilla con algoritmos AKUMA/AKULA. Diagnóstico diferencial, planificación de corrección y exportación PDF del informe preoperatorio. | [Abrir app](https://jmacot.github.io/knee-align) \| [Repo](https://github.com/jmacot/knee-align) |
-| **CPAK Planner** | Planifica la alineación coronal en prótesis total de rodilla. Introduce las medidas radiológicas y obtén la clasificación CPAK con el fenotipo del paciente. | [Abrir app](https://jmacot.github.io/CPAK) \| [Repo](https://github.com/jmacot/CPAK) |
-| **Analizador de Planning** | Analiza tu actividad mensual: turnos, quirófanos, consultas y guardias en una sola vista, con gráficas y retribución estimada. | [Abrir app](https://jmacot.github.io/planning-cot) \| [Repo](https://github.com/jmacot/planning-cot) |
-
-### 📝 Documentación
-
-| App | Descripción | Enlace |
-|-----|-------------|--------|
-| **Consentimientos Informados** | Accede a más de 210 consentimientos informados de SECOT y SAS. Busca por patología o navega por categorías para encontrar el documento que necesitas. | [Abrir app](https://jmacot.github.io/consentimientos) \| [Repo](https://github.com/jmacot/consentimientos) |
-| **Solicitud de Material Externo** | Solicita material quirúrgico externo en segundos. Elige casa comercial, selecciona el material del catálogo y genera el documento listo para enviar. | [Abrir app](https://jmacot.github.io/Material-Externo) \| [Repo](https://github.com/jmacot/Material-Externo) |
-
-### 🩺 Clínica
-
-| App | Descripción | Enlace |
-|-----|-------------|--------|
-| **Knee Scores** | 6 scores clínicos validados de rodilla (KOOS, WOMAC, Kujala, Lysholm, IKDC, KSS). Cálculo automático e interpretación por rangos. | [Abrir app](https://jmacot.github.io/knee-scores) \| [Repo](https://github.com/jmacot/knee-scores) |
-| **Rehabilitación COT** | 64 protocolos de rehabilitación postquirúrgica + 23 programas SERMEF. Timeline D3.js, cálculo de fase automático y vídeos de ejercicios. | [Abrir app](https://jmacot.github.io/rehabilitacion-cot) \| [Repo](https://github.com/jmacot/rehabilitacion-cot) |
-| **Información para Pacientes** | Portal con guías de información y rehabilitación para pacientes de cirugía de rodilla (PTR y lesiones meniscales). | [Abrir app](https://jmacot.github.io/pacientes) \| [Repo](https://github.com/jmacot/pacientes) |
-
-### 💰 Administración
-
-| App | Descripción | Enlace |
-|-----|-------------|--------|
-| **Calculadora de Guardias** | Calcula lo que vas a cobrar por tus guardias. Selecciona los días en el calendario y consulta el bruto, neto e IRPF para cada centro hospitalario. | [Abrir app](https://jmacot.github.io/calculadora-guardias) \| [Repo](https://github.com/jmacot/calculadora-guardias) |
-
-### 🎨 Herramientas
-
-| App | Descripción | Enlace |
-|-----|-------------|--------|
-| **IlustraCOT** | Generador de prompts para ilustraciones médicas de cirugía ortopédica. 5 estilos visuales y categorías quirúrgicas. | [Abrir app](https://jmacot.github.io/ilustracot) \| [Repo](https://github.com/jmacot/ilustracot) |
+Los repositorios de las herramientas pasaron a **privados** al mudarse. Los enlaces del tipo `jmacot.github.io/<herramienta>` **ya no responden**.
 
 ---
 
-## Tecnología
+## Lo que sí sigue vivo en este dominio
 
-```
-HTML5 + CSS3 + JavaScript vanilla
-```
+Son repos independientes, públicos y sin login:
 
-- **Zero dependencias** — cada app es un archivo HTML autocontenido.
-- **GitHub Pages** — desplegadas directamente desde el repositorio.
-- **Responsive** — adaptadas a móvil, tablet y escritorio.
-- **Modo oscuro** — landing page y todas las apps con detección automática y toggle manual.
-- **Offline-ready** — funcionan sin conexión tras la primera carga.
-- **Acceso protegido** — landing page encriptada con StatiCrypt. Sesión de 24 horas compartida con todas las apps.
-
----
-
-## Acceso
-
-El portal está protegido por contraseña mediante [StatiCrypt](https://github.com/robinmoisson/staticrypt).
-
-1. Visita **[jmacot.github.io](https://jmacot.github.io)** e introduce la clave de acceso.
-2. Una vez autenticado, puedes acceder a todas las herramientas sin volver a introducir la contraseña (sesión de 24 horas).
-3. Si intentas acceder directamente a una herramienta sin pasar por el portal, serás redirigido automáticamente.
-
-> Para desarrollo local, clona cualquier repositorio y abre el `index.html` en tu navegador.
-
-```bash
-git clone https://github.com/jmacot/plantillas-qx.git
-open plantillas-qx/index.html
-```
+| Sitio | Qué es |
+|-------|--------|
+| **[/ilustracot](https://jmacot.github.io/ilustracot/)** | Generador de prompts para ilustraciones médicas de COT |
+| **[/pacientes](https://jmacot.github.io/pacientes/)** | Guías de rehabilitación y cuidados postoperatorios, escritas para pacientes |
 
 ---
 
 ## Estructura
 
 ```
-jmacot.github.io/          ← este repo (portal principal)
-├── index.html              ← landing page con filtros por categoría
-├── password_template.html  ← plantilla de login StatiCrypt (lamp sky→violet)
-├── password_preview.html   ← preview del login sin StatiCrypt (dev)
-├── .github/workflows/      ← workflow de encriptación y despliegue
-├── LICENSE
-├── .gitignore
-└── README.md
-
-Cada herramienta vive en su propio repositorio:
-├── calculadora-guardias/
-├── consentimientos/
-├── CPAK/
-├── Ilustracot/
-├── knee-align/
-├── knee-scores/
-├── Material-Externo/
-├── pacientes/
-├── planning-cot/
-├── plantillas-qx/
-└── rehabilitacion-cot/
+index.html               ← la página de redirección (esto es todo lo que se sirve)
+icon.svg                 ← icono
+password_template.html   ← restos del portal StatiCrypt anterior, ya sin uso
+password_preview.html    ←   ídem
+tools/                   ←   ídem
+LICENSE · _config.yml
 ```
 
 ---
 
 ## Licencia
 
-All Rights Reserved — consulta el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-<div align="center">
-
-**[jmacot.github.io](https://jmacot.github.io)** · Herramientas de uso clínico
-
-</div>
+All Rights Reserved — ver [LICENSE](LICENSE).
